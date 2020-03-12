@@ -1,6 +1,3 @@
-package Concesionario;
-//Console class for new jdk's
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;

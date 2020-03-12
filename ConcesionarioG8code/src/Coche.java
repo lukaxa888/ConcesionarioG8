@@ -1,5 +1,3 @@
-package Concesionario;
-
 public class Coche extends Vehiculo {
 	
 	private int nPuertas;

@@ -1,5 +1,3 @@
-package Concesionario;
-
 public class Camion extends Vehiculo {
 
 	

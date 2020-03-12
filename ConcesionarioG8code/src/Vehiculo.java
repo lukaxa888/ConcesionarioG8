@@ -1,5 +1,3 @@
-package Concesionario;
-
 public abstract class Vehiculo {
 
 	private String nBastidor;
