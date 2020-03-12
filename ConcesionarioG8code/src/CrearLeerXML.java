@@ -34,10 +34,10 @@ public class CrearLeerXML {
     public static void main(String[] args) {
         String nomArchivo = "Concesionario";
         
-        List<vehiculo> listaUsuarios = new ArrayList<vehiculo>();
+        List<vehiculo_xml> listaUsuarios = new ArrayList<vehiculo_xml>();
         
-        listaUsuarios.add(new vehiculo(1, "Sergio", "234242543543"));
-        listaUsuarios.add(new vehiculo(2, "Laura", "76865542424"));
+        listaUsuarios.add(new vehiculo_xml(1, "Sergio", "234242543543"));
+        listaUsuarios.add(new vehiculo_xml(2, "Laura", "76865542424"));
         
         try {
             crearXML(nomArchivo, listaUsuarios);
@@ -48,8 +48,11 @@ public class CrearLeerXML {
     }
     
     public static void leerXML() {
-        try {
-            File archivo = new File("XMLarchivo.xml");
+    	
+    	try {
+            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
+            String nombrexml = Console.readString();
+            File archivo = new File(nombrexml+".xml");
             
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = factory.newDocumentBuilder();
@@ -80,11 +83,15 @@ public class CrearLeerXML {
             }
             
         } catch(Exception e) {
-            e.printStackTrace();
+           System.out.println();
+        	System.out.println("No se encuentra el archivo, saliendo al menú...");
+           System.out.println();
+        	// e.printStackTrace();   
         }
+ 	
     }
     
-    public static void crearXML(String nomArchivo, List<vehiculo> listaUsuarios) throws ParserConfigurationException, TransformerConfigurationException, TransformerException {
+    public static void crearXML(String nomArchivo, List<vehiculo_xml> listaUsuarios) throws ParserConfigurationException, TransformerConfigurationException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         
         try {

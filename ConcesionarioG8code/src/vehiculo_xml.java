@@ -1,10 +1,10 @@
 
-public class vehiculo {
+public class vehiculo_xml {
     private int idUsuario;
     private String nombre;
     private String telefono;
 
-    public vehiculo(int idUsuario, String nombre, String telefono) {
+    public vehiculo_xml(int idUsuario, String nombre, String telefono) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.telefono = telefono;

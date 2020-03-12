@@ -1,5 +1,6 @@
 public class Menu {
 
+	CrearLeerXML xm1 = null;
 	
 	Menu(){
 		
@@ -108,18 +109,12 @@ public class Menu {
 				c1.setnPuertas(Console.readInt());
 				System.out.println("¿Cúal es la capacidad del maletero?");
 				c1.setCapacidadMaletero(Console.readInt());
-
-
-				
-				
-				cbd.insertarVehiculo(c1);
-				
 			
-
-				
+				cbd.insertarVehiculo(c1);
+			
 				System.out.println();
 				System.out.println();
-				System.out.println("¿Has insertado un coche con exito!");
+				System.out.println("¡Has insertado un coche con exito!");
 			
 			
 			}
@@ -157,6 +152,12 @@ public class Menu {
 			
 			
 			}
+			
+		}
+		
+		if(numero==1) {
+			
+			xm1.leerXML();
 			
 		}
 		

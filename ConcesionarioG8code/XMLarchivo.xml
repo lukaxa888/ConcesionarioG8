@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<concesionario>
+<vehiculo>
+    <Numero_bastidor>LDO12345456</Numero_bastidor>
+    <Matricula>1496VHE</Matricula>
+    <Color>blanco</Color>
+    <Numero_asientos>3</Numero_asientos>
+    <Precio>15.548€</Precio>
+    <Serioe_Numero_serie>2</Serioe_Numero_serie>
+    <Tipo>coche</Tipo>
+</vehiculo>
+<vehiculo>
+    <Numero_bastidor>LLO12345456</Numero_bastidor>
+    <Matricula>1056VLE</Matricula>
+    <Color>rojo</Color>
+    <Numero_asientos>4</Numero_asientos>
+    <Precio>11.548€</Precio>
+    <Serioe_Numero_serie>1</Serioe_Numero_serie>
+    <Tipo>camion</Tipo>
+</vehiculo>
+<vehiculo>
+    <Numero_bastidor>ODO12345456</Numero_bastidor>
+    <Matricula>1406LHE</Matricula>
+    <Color>negro</Color>
+    <Numero_asientos>650</Numero_asientos>
+    <Precio>10.548€</Precio>
+    <Serioe_Numero_serie>3</Serioe_Numero_serie>
+    <Tipo>camion</Tipo>
+</vehiculo>
+</concesionario>

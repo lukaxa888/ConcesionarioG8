@@ -19,6 +19,30 @@ import com.mysql.cj.MysqlConnection;
 	    Statement comando = null;
 	    ResultSet registro;
 	    String nombreTabla;
+	    	    
+	    /**
+		  * Conecta el objeto a la base de datos configurada en el método al crear un objeto ConexionBD
+		  */ 
+	    public ConexionBD() {
+	    	try {
+	            //Driver JDBC
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            conexion = DriverManager.getConnection("jdbc:mysql://10.14.0.96:3306/?user=root&password=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
+	        } catch (ClassNotFoundException ex) {
+	            ex.printStackTrace();
+	            conexion = null;
+	        } catch (SQLException ex) {
+	        	ex.printStackTrace();
+	            conexion = null;
+	        } catch (Exception ex) {
+	        	ex.printStackTrace();
+	        	conexion = null;
+	        }
+	    }
+	    
+	    public void desconectar() {
+	    	
+	    }
 	    
 	    /**
 	     * Printea TODOS los datos de una tabla
@@ -77,27 +101,8 @@ import com.mysql.cj.MysqlConnection;
 	    	 }
 	    	 
 	     
-	     /**
-		  * Conecta el objeto a la base de datos configurada en el método
-		  */ 
-	    public Connection MySQLConnect() {
-	 
-	        try {
-	            //Driver JDBC
-	            Class.forName("com.mysql.cj.jdbc.Driver");
-	            conexion = DriverManager.getConnection("jdbc:mysql://10.14.0.96:3306/?user=root&password=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
-	        } catch (ClassNotFoundException ex) {
-	            ex.printStackTrace();
-	            conexion = null;
-	        } catch (SQLException ex) {
-	        	ex.printStackTrace();
-	            conexion = null;
-	        } catch (Exception ex) {
-	        	ex.printStackTrace();
-	        	conexion = null;
-	        }
-	        return conexion;
-	    }
+	     
+
 		        
 	 public static void main(String[] args) {
 		 //Scanner teclado = new Scanner(System.in);
