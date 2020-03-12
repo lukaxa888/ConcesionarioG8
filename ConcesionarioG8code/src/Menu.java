@@ -46,16 +46,19 @@ public class Menu {
 			}
 			
 		}
-		
-		
-		
 	}
+		
+		
 	
 	void comprar() {
+		ConexionBD cbd = new ConexionBD();
+	
 		int numero;
+		Coche c1=new Coche();
+		Camion ca1=new Camion();
 		int cocheOCamion;
 		String nBastidor;
-		int matricula;
+		String matricula;
 		String color;
 		int nAsientos;
 		int precio;
@@ -82,6 +85,7 @@ public class Menu {
 				cocheOCamion=Console.readInt();
 				
 			}while(cocheOCamion<1||cocheOCamion>2);
+<<<<<<< HEAD
 			
 			if(cocheOCamion==1) {
 				Coche c1=new Coche();
@@ -106,6 +110,42 @@ public class Menu {
 				System.out.println("Dame el año de fabricación");
 
 				c1.setAñoFabricacion(Console.readInt());
+=======
+			System.out.println("Dame el numero de bastidor");
+			nBastidor = Console.readString();
+			System.out.println("Dame la matrícula");
+			matricula = Console.readString();
+			System.out.println("Dame el color");
+			color = Console.readString();
+			System.out.println("Dame el número de asientos");
+			nAsientos = Console.readInt();
+			System.out.println("¿Por cuanto has comprado el coche?");
+			precio = Console.readInt();
+			
+			System.out.println("Dame el número de série");
+			nSerie = Console.readInt();
+			System.out.println("Dame el modelo");
+			modelo =  Console.readString();
+			System.out.println("Dame la marca");
+			marca = Console.readString();
+			System.out.println("Dame el año de fabricación");
+			añoFabricacion =  Console.readInt();
+			if(cocheOCamion==1) {
+				c1.setTipo("Coche");
+				c1.setnBastidor(nBastidor);
+				c1.setMatricula(matricula);
+				c1.setColor(color);
+				c1.setnAsientos(nAsientos);
+				c1.setPrecio(precio);
+				c1.setnSerie(nSerie);
+				c1.setModelo(modelo);
+				c1.setMarca(marca);
+				c1.setAñoFabricacion(añoFabricacion);
+				
+				
+				
+				
+>>>>>>> 510b7c4526e87ca5ba7f3483e38c9fa355a8812c
 				System.out.println("Dame el número de puertas");
 				c1.setnPuertas(Console.readInt());
 				System.out.println("¿Cúal es la capacidad del maletero?");
@@ -119,8 +159,8 @@ public class Menu {
 			
 			}
 			if(cocheOCamion==2) {
-				Camion ca1=new Camion();
 				
+<<<<<<< HEAD
 				System.out.println("Dame el numero de bastidor");
 				ca1.setnBastidor(Console.readString());
 				System.out.println("Dame la matrícula");
@@ -140,6 +180,20 @@ public class Menu {
 				ca1.setMarca(Console.readString());
 				System.out.println("Dame el año de fabricación");
 				ca1.setAñoFabricacion(Console.readInt());
+=======
+				ca1.setTipo("Camion");				
+			
+				ca1.setnBastidor(nBastidor);
+				ca1.setMatricula(matricula);
+				ca1.setColor(color);
+				ca1.setnAsientos(nAsientos);
+				ca1.setPrecio(precio);
+				ca1.setnSerie(nSerie);
+				ca1.setModelo(modelo);
+				ca1.setMarca(marca);
+				ca1.setAñoFabricacion(añoFabricacion);
+				
+>>>>>>> 510b7c4526e87ca5ba7f3483e38c9fa355a8812c
 				System.out.println("¿Cúal es la capacidad maxima de la carga");
 				ca1.setCarga(Console.readInt());
 				System.out.println("¿Cúal es el tipo de mercancía?");
