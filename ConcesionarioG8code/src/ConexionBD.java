@@ -55,14 +55,16 @@ import com.mysql.cj.MysqlConnection;
 	      */
 	     public void insertarVehiculo(Vehiculo V1) {
 	         
-	    	 Coche C1=(Coche)V1;
-	    	 Camion Cam1=(Camion)V1;
+	    	 
+	    	
 	    	 if(V1.getTipo()=="Coche") {
+	    		 Coche C1=(Coche)V1;
 	    		 String Query = "INSERT INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+","+C1.getnBastidor()+")";
 	    		 System.out.println("Se ha insertado un coche con "+C1.getnPuertas()+" puertas "+C1.getCapacidadMaletero()+ "de maletero y numero de bastidor "+C1.getnBastidor());
 	    	 }
 	    	 
 	    	 if(V1.getTipo()=="Camion") {
+	    		 Camion Cam1=(Camion)V1;
 	    		 String Query = "INSERT INTO coche VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+","+Cam1.getnBastidor()+")";
 	    		 System.out.println("Se ha insertado un camion con "+Cam1.getCarga()+" de carga, mercancía de tipo "+Cam1.getTipoMercancia()+" y numero de bastidor "+Cam1.getnBastidor());
 	    	 }

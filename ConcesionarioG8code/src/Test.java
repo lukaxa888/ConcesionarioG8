@@ -7,7 +7,7 @@ public class Test {
 		
 		m1.menu();
 		
-		Vehiculo V1 = null;
+		
 		
 		/*
 		V1.setnBastidor("HY231233");

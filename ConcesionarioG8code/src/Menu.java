@@ -36,7 +36,9 @@ public class Menu {
 			}
 			System.out.println();
 			}while(numero < 0 && numero > 6);
-			
+			if(numero == 1) {
+				comprar();
+			}
 			if(numero == 5) {
 				salir=true;
 			}
@@ -50,7 +52,7 @@ public class Menu {
 	void comprar() {
 		int numero;
 		int cocheOCamion;
-		int nBastidor;
+		String nBastidor;
 		int matricula;
 		String color;
 		int nAsientos;
@@ -61,7 +63,8 @@ public class Menu {
 		String marca;
 		int añoFabricacion;
 		do{
-			
+			System.out.println("1 Para XML");
+			System.out.println("2 Para a mano");
 			numero=Console.readInt();
 			
 		}while(numero<1||numero>2);
@@ -82,7 +85,7 @@ public class Menu {
 				ConexionBD cbd = new ConexionBD();
 				
 				System.out.println("Dame el numero de bastidor");
-				c1.setAñoFabricacion(Console.readInt());
+				c1.setnBastidor(Console.readString());
 				System.out.println("Dame la matrícula");
 				c1.setMatricula(Console.readString());
 				System.out.println("Dame el color");
@@ -106,7 +109,7 @@ public class Menu {
 				System.out.println("¿Cúal es la capacidad del maletero?");
 				c1.setCapacidadMaletero(Console.readInt());
 
-				añoFabricacion = Console.readInt();
+
 				
 				
 				cbd.insertarVehiculo(c1);
