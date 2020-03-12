@@ -77,8 +77,9 @@ import com.mysql.cj.MysqlConnection;
 	     /**
 	      * Método que inserta un valor introducido por teclado en la tabla definida"
 	      */
-	     public void insertarVehiculo(Vehiculo[]) {
- 
+	     public void insertarVehiculo(Vehiculo V1) {
+	         
+	    	 
 	    	
 	    	 if(V1.getTipo()=="Coche") {
 	    		 Coche C1=(Coche)V1;
