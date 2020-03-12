@@ -1,6 +1,7 @@
 public class Menu {
 
 	CrearLeerXML xm1 = null;
+	ConexionBD cbd = new ConexionBD();
 	
 	Menu(){
 		
@@ -75,15 +76,15 @@ public class Menu {
 			
 			do{
 				System.out.println("1 Para coche");
-				
+				System.out.println();
 				System.out.println("2 Para camión");
 				
 				cocheOCamion=Console.readInt();
 				
 			}while(cocheOCamion<1||cocheOCamion>2);
+			
 			if(cocheOCamion==1) {
 				Coche c1=new Coche();
-				ConexionBD cbd = new ConexionBD();
 				
 				System.out.println("Dame el numero de bastidor");
 				c1.setnBastidor(Console.readString());
@@ -95,7 +96,7 @@ public class Menu {
 				c1.setnAsientos(Console.readInt());
 				System.out.println("¿Por cuanto has comprado el coche?");
 				c1.setPrecio(Console.readInt());
-				tipo="Coche";
+				tipo="coche";
 				System.out.println("Dame el número de série");
 				c1.setnSerie(Console.readInt());
 				System.out.println("Dame el modelo");
@@ -113,17 +114,15 @@ public class Menu {
 				cbd.insertarVehiculo(c1);
 			
 				System.out.println();
-				System.out.println();
 				System.out.println("¡Has insertado un coche con exito!");
-			
+				System.out.println();
 			
 			}
 			if(cocheOCamion==2) {
 				Camion ca1=new Camion();
 				
-				
 				System.out.println("Dame el numero de bastidor");
-				ca1.setAñoFabricacion(Console.readInt());
+				ca1.setnBastidor(Console.readString());
 				System.out.println("Dame la matrícula");
 				ca1.setMatricula(Console.readString());
 				System.out.println("Dame el color");
@@ -132,7 +131,7 @@ public class Menu {
 				ca1.setnAsientos(Console.readInt());
 				System.out.println("¿Por cuanto has comprado el coche?");
 				ca1.setPrecio(Console.readInt());
-				tipo="Coche";
+				tipo="camion";
 				System.out.println("Dame el número de série");
 				ca1.setnSerie(Console.readInt());
 				System.out.println("Dame el modelo");
@@ -146,10 +145,13 @@ public class Menu {
 				System.out.println("¿Cúal es el tipo de mercancía?");
 				ca1.setTipoMercancia(Console.readString());;
 				
+				Vehiculo camiones[] = {ca1};
+				
+				cbd.insertarVehiculo(camiones);
+				
 				System.out.println();
+				System.out.println("¡Has insertado un camión con exito!");
 				System.out.println();
-				System.out.println("¿Has insertado un camión con exito!");
-			
 			
 			}
 			

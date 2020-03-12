@@ -77,9 +77,8 @@ import com.mysql.cj.MysqlConnection;
 	     /**
 	      * Método que inserta un valor introducido por teclado en la tabla definida"
 	      */
-	     public void insertarVehiculo(Vehiculo V1) {
-	         
-	    	 
+	     public void insertarVehiculo(Vehiculo[]) {
+ 
 	    	
 	    	 if(V1.getTipo()=="Coche") {
 	    		 Coche C1=(Coche)V1;
@@ -107,7 +106,6 @@ import com.mysql.cj.MysqlConnection;
 	 public static void main(String[] args) {
 		 //Scanner teclado = new Scanner(System.in);
 		 ConexionBD db = new ConexionBD();
-        db.MySQLConnect();
 
         
         

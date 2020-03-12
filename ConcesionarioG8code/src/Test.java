@@ -5,9 +5,7 @@ public class Test {
 
 		Menu m1 = new Menu();
 		
-		m1.menu();
-		
-		
+		m1.menu();	
 		
 		/*
 		V1.setnBastidor("HY231233");
