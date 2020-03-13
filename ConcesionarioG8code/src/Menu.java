@@ -85,32 +85,32 @@ public class Menu {
 				cocheOCamion=Console.readInt();
 				
 			}while(cocheOCamion<1||cocheOCamion>2);
-<<<<<<< HEAD
+
 			
 			if(cocheOCamion==1) {
-				Coche c1=new Coche();
+				Coche c11=new Coche();
 				
 				System.out.println("Dame el numero de bastidor");
-				c1.setnBastidor(Console.readString());
+				c11.setnBastidor(Console.readString());
 				System.out.println("Dame la matrícula");
-				c1.setMatricula(Console.readString());
+				c11.setMatricula(Console.readString());
 				System.out.println("Dame el color");
-				c1.setColor(Console.readString());
+				c11.setColor(Console.readString());
 				System.out.println("Dame el número de asientos");
-				c1.setnAsientos(Console.readInt());
+				c11.setnAsientos(Console.readInt());
 				System.out.println("¿Por cuanto has comprado el coche?");
-				c1.setPrecio(Console.readInt());
+				c11.setPrecio(Console.readInt());
 				tipo="coche";
 				System.out.println("Dame el número de série");
-				c1.setnSerie(Console.readInt());
+				c11.setnSerie(Console.readInt());
 				System.out.println("Dame el modelo");
-				c1.setModelo(Console.readString());
+				c11.setModelo(Console.readString());
 				System.out.println("Dame la marca");
-				c1.setMarca(Console.readString());
+				c11.setMarca(Console.readString());
 				System.out.println("Dame el año de fabricación");
 
-				c1.setAñoFabricacion(Console.readInt());
-=======
+				c11.setAñoFabricacion(Console.readInt());
+
 			System.out.println("Dame el numero de bastidor");
 			nBastidor = Console.readString();
 			System.out.println("Dame la matrícula");
@@ -131,27 +131,25 @@ public class Menu {
 			System.out.println("Dame el año de fabricación");
 			añoFabricacion =  Console.readInt();
 			if(cocheOCamion==1) {
-				c1.setTipo("Coche");
-				c1.setnBastidor(nBastidor);
-				c1.setMatricula(matricula);
-				c1.setColor(color);
-				c1.setnAsientos(nAsientos);
-				c1.setPrecio(precio);
-				c1.setnSerie(nSerie);
-				c1.setModelo(modelo);
-				c1.setMarca(marca);
-				c1.setAñoFabricacion(añoFabricacion);
+				c11.setTipo("Coche");
+				c11.setnBastidor(nBastidor);
+				c11.setMatricula(matricula);
+				c11.setColor(color);
+				c11.setnAsientos(nAsientos);
+				c11.setPrecio(precio);
+				c11.setnSerie(nSerie);
+				c11.setModelo(modelo);
+				c11.setMarca(marca);
+				c11.setAñoFabricacion(añoFabricacion);
 				
 				
 				
-				
->>>>>>> 510b7c4526e87ca5ba7f3483e38c9fa355a8812c
 				System.out.println("Dame el número de puertas");
-				c1.setnPuertas(Console.readInt());
+				c11.setnPuertas(Console.readInt());
 				System.out.println("¿Cúal es la capacidad del maletero?");
-				c1.setCapacidadMaletero(Console.readInt());
+				c11.setCapacidadMaletero(Console.readInt());
 			
-				cbd.insertarVehiculo(c1);
+				cbd.insertarVehiculo(c11);
 			
 				System.out.println();
 				System.out.println("¡Has insertado un coche con exito!");
@@ -160,7 +158,6 @@ public class Menu {
 			}
 			if(cocheOCamion==2) {
 				
-<<<<<<< HEAD
 				System.out.println("Dame el numero de bastidor");
 				ca1.setnBastidor(Console.readString());
 				System.out.println("Dame la matrícula");
@@ -180,7 +177,7 @@ public class Menu {
 				ca1.setMarca(Console.readString());
 				System.out.println("Dame el año de fabricación");
 				ca1.setAñoFabricacion(Console.readInt());
-=======
+
 				ca1.setTipo("Camion");				
 			
 				ca1.setnBastidor(nBastidor);
@@ -192,16 +189,15 @@ public class Menu {
 				ca1.setModelo(modelo);
 				ca1.setMarca(marca);
 				ca1.setAñoFabricacion(añoFabricacion);
-				
->>>>>>> 510b7c4526e87ca5ba7f3483e38c9fa355a8812c
+
 				System.out.println("¿Cúal es la capacidad maxima de la carga");
 				ca1.setCarga(Console.readInt());
 				System.out.println("¿Cúal es el tipo de mercancía?");
 				ca1.setTipoMercancia(Console.readString());;
 				
-				Vehiculo camiones[] = {ca1};
+				//Vehiculo camiones[] = {ca1};
 				
-				cbd.insertarVehiculo(camiones);
+				cbd.insertarVehiculo(ca1);
 				
 				System.out.println();
 				System.out.println("¡Has insertado un camión con exito!");
@@ -223,4 +219,5 @@ public class Menu {
 	
 	
 	
+	}
 }
