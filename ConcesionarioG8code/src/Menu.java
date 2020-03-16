@@ -9,7 +9,11 @@ public class Menu {
 	}
 	
 	void menutexto() {
-		System.out.println("¿Qué quieres hacer?");
+		
+		System.out.println("\t GESTIÓN DE CONCESIONARIO G8");
+		System.out.println("-----------------------------------------");
+		
+		System.out.println("¿Qué desea hacer?");
 		
 		System.out.println("1 \t Comprar");
 		
@@ -27,7 +31,6 @@ public class Menu {
 		boolean salir=false;
 		int numero;
 		
-		
 		while(salir==false) {
 			do {
 			menutexto();
@@ -38,9 +41,19 @@ public class Menu {
 			}
 			System.out.println();
 			}while(numero < 0 && numero > 6);
+			
 			if(numero == 1) {
 				comprar();
 			}
+			
+			if(numero == 2) {
+				vender();
+			}
+			
+			if(numero == 3) {
+				pintar();
+			}
+			
 			if(numero == 5) {
 				salir=true;
 			}
@@ -48,7 +61,72 @@ public class Menu {
 		}
 	}
 		
+	void vender() {
+		ConexionBD cbd = new ConexionBD();
 		
+		int numTipo;
+		Coche c1=new Coche();
+		Camion ca1=new Camion();		
+		
+		do {
+			System.out.println("SISTEMA DE VENTA");
+			System.out.println("-------------------------------");
+			System.out.println("Que desea vender?");
+			System.out.println("1-> COCHE");
+			System.out.println("2-> CAMION");
+			numTipo = Console.readInt();
+		} while(numTipo<1||numTipo>2);
+		
+		System.out.println("Introduce un bastidor para borrar:");
+		String numBastidor=Console.readString();
+		
+		if(numTipo==1) {
+			c1.setnBastidor(numBastidor);
+			cbd.venderVehiculo(c1.getnBastidor());
+		}
+		
+		if(numTipo==2) {
+			ca1.setnBastidor(numBastidor);
+			cbd.venderVehiculo(ca1.getnBastidor());
+		}
+		
+	}	
+	
+	void pintar() {
+		ConexionBD cbd = new ConexionBD();
+		
+		int numTipo;
+		Coche c1=new Coche();
+		Camion ca1=new Camion();		
+		
+		do {
+			System.out.println("SISTEMA DE PINTADO");
+			System.out.println("-------------------------------");
+			System.out.println("Que desea pintar?");
+			System.out.println("1-> COCHE");
+			System.out.println("2-> CAMION");
+			numTipo = Console.readInt();
+		} while(numTipo<1||numTipo>2);
+		
+		System.out.println("Introduce un bastidor para pintar:");
+		String numBastidor=Console.readString();
+		
+		System.out.println("Introduce un color nuevo para el vehículo:");
+		String nuevoColor=Console.readString();
+		
+		if(numTipo==1) {
+			c1.setnBastidor(numBastidor);
+			c1.setColor(nuevoColor);
+			cbd.pintarVehiculo(c1.getnBastidor(),c1.getColor());
+		}
+		
+		if(numTipo==2) {
+			ca1.setnBastidor(numBastidor);
+			ca1.setColor(nuevoColor);
+			cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
+		}
+		
+	}
 	
 	void comprar() {
 		ConexionBD cbd = new ConexionBD();
@@ -58,9 +136,13 @@ public class Menu {
 		Camion ca1=new Camion();
 		int cocheOCamion;
 
+		System.out.println("SISTEMA DE COMPRA");
+		System.out.println("-------------------------------");
+		System.out.println("Cómo desea introducir el vehículo?");
+		
 		do{
-			System.out.println("1 Para XML");
-			System.out.println("2 Para a mano");
+			System.out.println("1-> ARCHIVO XML");
+			System.out.println("2-> INTRODUCIR DATOS A MANO");
 			numero=Console.readInt();
 			
 		}while(numero<1||numero>2);

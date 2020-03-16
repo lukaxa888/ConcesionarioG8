@@ -83,9 +83,10 @@ import com.mysql.cj.MysqlConnection;
 	    	 
 	    	 if(V1.getTipo().equals("coche")) {
 	    		 Coche C1=(Coche)V1;
-	    		 Query2 = "INSERT INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
-	    		 Query = "INSERT INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
-	    		 System.out.println(Query);
+	    		 Query = "INSERT INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
+	    		 //System.out.println(Query);
+	    		 Query2 = "INSERT INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
+	    		 //System.out.println(Query2);
 	    		 System.out.println("Se ha insertado un coche con "+C1.getnPuertas()+" puertas "+C1.getCapacidadMaletero()+ " de maletero y numero de bastidor "+C1.getnBastidor());
 	    	 }
 	    	 
@@ -97,22 +98,62 @@ import com.mysql.cj.MysqlConnection;
 	                try {
 						Statement st = conexion.createStatement();
 						st.executeQuery("USE concesionario");
+						st.executeUpdate(Query);
 						st.executeUpdate(Query2);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+	    	 }
+	    	 
+	     public void venderVehiculo(String numeroBastidor) {
+	    	    	 
+	    	 String Query = new String();
+	    	 String Query1 = new String();
+	    	 String Query2 = new String();
+	    	 
+	    	 
+	    		 Query = "DELETE FROM vehiculo WHERE Numero_bastidor=\""+numeroBastidor+"\"";
+	    		 //System.out.println(Query);
+	    		 Query1 = "DELETE FROM coche WHERE Vehiculo_Numero_bastidor=\""+numeroBastidor+"\"";
+	    		 //System.out.println(Query1);    		 
+	    		 Query2 = "DELETE FROM camion WHERE Vehiculo_Numero_bastidor=\""+numeroBastidor+"\"";
+	    		 //System.out.println(Query1);
+	    		 System.out.println("Correcto. Se ha eliminado el vehiculo con numero de bastidor "+numeroBastidor+".");
+	    		 System.out.println();
+	    	 
+	                try {
+						Statement st = conexion.createStatement();
+						st.executeQuery("USE concesionario");
+						st.executeUpdate(Query);
+						st.executeUpdate(Query1);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+	     }
+	     
+	     public void pintarVehiculo(String numeroBastidor, String nuevoColor) {
+	    	 
+	    	 String Query = new String();
+	    	 
+	    		 Query = "UPDATE vehiculo SET Color=\""+nuevoColor+"\" WHERE Numero_bastidor=\""+numeroBastidor+"\"";
+	    		 //System.out.println(Query);	    		 
+	    		 System.out.println("Correcto. Se ha pintado de color "+nuevoColor+" el vehiculo con numero de bastidor "+numeroBastidor+".");
+	    		 System.out.println();
+	    	 
+	                try {
+						Statement st = conexion.createStatement();
+						st.executeQuery("USE concesionario");
 						st.executeUpdate(Query);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-	                java.sql.ResultSet resultado;
-	    	 }
-	    	 
+	     }
 	     
 	     
-
 		        
 	 public static void main(String[] args) {
 		 //Scanner teclado = new Scanner(System.in);
 		 ConexionBD db = new ConexionBD();
-  
         
         db.verDatos("coche");
     
