@@ -21,7 +21,7 @@ public class Menu {
 		
 		System.out.println("3 \t Pintar");
 		
-		System.out.println("4 \t Inventario");
+		System.out.println("4 \t Stock de Vehículos");
 		
 		System.out.println("5 \t Salir");
 		
@@ -33,14 +33,15 @@ public class Menu {
 		
 		while(salir==false) {
 			do {
-			menutexto();
-			System.out.println();
-			numero =  Console.readInt();
-			if(numero < 1 || numero > 5 ) {
-				System.out.println("Intenta un numero entre 1 y 5");
-			}
-			System.out.println();
-			}while(numero < 0 && numero > 6);
+				menutexto();
+				System.out.print("Introduzca una opción: ");
+				numero =  Console.readInt();
+				if(numero < 1 || numero > 5 ) {
+					System.out.println("Error. Se debe introducir un número entre 1 y 5");
+				}
+					System.out.println();
+				
+			} while(numero < 0 && numero > 6);
 			
 			if(numero == 1) {
 				comprar();
@@ -54,6 +55,10 @@ public class Menu {
 				pintar();
 			}
 			
+			if(numero == 4) {
+				stock();
+			}
+			
 			if(numero == 5) {
 				salir=true;
 			}
@@ -61,6 +66,36 @@ public class Menu {
 		}
 	}
 		
+	/**
+	 * Pide un tipo de vehículo y lista todos los que hay junto con sus atributos.
+	 */
+	void stock() {
+		ConexionBD cbd = new ConexionBD();
+		
+		int numTipo;		
+		
+		do {
+			System.out.println("VEHÍCULOS EN STOCK");
+			System.out.println("-------------------------------");
+			System.out.println("Que desea listar?");
+			System.out.println("1-> COCHES");
+			System.out.println("2-> CAMIONES");
+			numTipo = Console.readInt();
+		} while(numTipo<1||numTipo>2);
+		
+		if(numTipo==1) {
+			cbd.verDatos("coche");
+			System.out.println();
+		}
+		
+		if(numTipo==2) {
+			cbd.verDatos("camion");
+			System.out.println();
+		}
+		
+		cbd.desconectarMYSQL();
+	}	
+	
 	void vender() {
 		ConexionBD cbd = new ConexionBD();
 		
@@ -89,7 +124,7 @@ public class Menu {
 			ca1.setnBastidor(numBastidor);
 			cbd.venderVehiculo(ca1.getnBastidor());
 		}
-		
+		cbd.desconectarMYSQL();
 	}	
 	
 	void pintar() {
@@ -101,7 +136,7 @@ public class Menu {
 		
 		do {
 			System.out.println("SISTEMA DE PINTADO");
-			System.out.println("-------------------------------");
+			System.out.println("-------------------------------------------");
 			System.out.println("Que desea pintar?");
 			System.out.println("1-> COCHE");
 			System.out.println("2-> CAMION");
@@ -125,7 +160,7 @@ public class Menu {
 			ca1.setColor(nuevoColor);
 			cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
 		}
-		
+		cbd.desconectarMYSQL();
 	}
 	
 	void comprar() {
@@ -145,7 +180,7 @@ public class Menu {
 			System.out.println("2-> INTRODUCIR DATOS A MANO");
 			numero=Console.readInt();
 			
-		}while(numero<1||numero>2);
+		} while(numero<1||numero>2);
 		
 		if(numero==2) {
 			
@@ -156,33 +191,33 @@ public class Menu {
 				
 				cocheOCamion=Console.readInt();
 				
-			}while(cocheOCamion<1||cocheOCamion>2);
+			} while(cocheOCamion<1||cocheOCamion>2);
 			
 			if(cocheOCamion==1) {
 				
 				c1.setTipo("coche");
 				
-				System.out.println("Dame el numero de bastidor");
+				System.out.println("Numero de bastidor:");
 				c1.setnBastidor(Console.readString());
-				System.out.println("Dame la matrícula");
+				System.out.println("Matrícula:");
 				c1.setMatricula(Console.readString());
-				System.out.println("Dame el color");
+				System.out.println("Color:");
 				c1.setColor(Console.readString());
-				System.out.println("Dame el número de asientos");
+				System.out.println("Número de asientos:");
 				c1.setnAsientos(Console.readInt());
-				System.out.println("¿Por cuanto has comprado el coche?");
+				System.out.println("Precio pagado:");
 				c1.setPrecio(Console.readInt());
-				System.out.println("Dame el número de série");
+				System.out.println("Número de serie:");
 				c1.setnSerie(Console.readInt());
-				System.out.println("Dame el modelo");
-				c1.setModelo(Console.readString());
-				System.out.println("Dame la marca");
+				System.out.println("Marca:");
 				c1.setMarca(Console.readString());
-				System.out.println("Dame el año de fabricación");
+				System.out.println("Modelo:");
+				c1.setModelo(Console.readString());
+				System.out.println("Año de fabricación:");
 				c1.setAñoFabricacion(Console.readInt());				
-				System.out.println("Dame el número de puertas");
+				System.out.println("Número de puertas:");
 				c1.setnPuertas(Console.readInt());
-				System.out.println("¿Cúal es la capacidad del maletero?");
+				System.out.println("Capacidad de maletero:");
 				c1.setCapacidadMaletero(Console.readInt());
 			
 				cbd.insertarVehiculo(c1);
@@ -192,31 +227,32 @@ public class Menu {
 				System.out.println();
 			
 			}
+			
 			if(cocheOCamion==2) {
 				
 				ca1.setTipo("camion");
 				
-				System.out.println("Dame el numero de bastidor");
+				System.out.println("Numero de bastidor:");
 				ca1.setnBastidor(Console.readString());
-				System.out.println("Dame la matrícula");
+				System.out.println("Matrícula:");
 				ca1.setMatricula(Console.readString());
-				System.out.println("Dame el color");
+				System.out.println("Color:");
 				ca1.setColor(Console.readString());
-				System.out.println("Dame el número de asientos");
+				System.out.println("Número de asientos:");
 				ca1.setnAsientos(Console.readInt());
-				System.out.println("¿Por cuanto has comprado el coche?");
+				System.out.println("Precio pagado:");
 				ca1.setPrecio(Console.readInt());
-				System.out.println("Dame el número de série");
+				System.out.println("Número de série:");
 				ca1.setnSerie(Console.readInt());
-				System.out.println("Dame el modelo");
-				ca1.setModelo(Console.readString());
-				System.out.println("Dame la marca");
+				System.out.println("Marca:");
 				ca1.setMarca(Console.readString());
-				System.out.println("Dame el año de fabricación");
+				System.out.println("Modelo:");
+				ca1.setModelo(Console.readString());
+				System.out.println("Año de fabricación:");
 				ca1.setAñoFabricacion(Console.readInt());
-				System.out.println("¿Cúal es la capacidad maxima de la carga");
+				System.out.println("Capacidad máx. de carga:");
 				ca1.setCarga(Console.readInt());
-				System.out.println("¿Cúal es el tipo de mercancía?");
+				System.out.println("Tipo de mercancía:");
 				ca1.setTipoMercancia(Console.readString());;
 				
 				cbd.insertarVehiculo(ca1);
@@ -228,7 +264,7 @@ public class Menu {
 			}
 			
 		}
-		
+		cbd.desconectarMYSQL();
 	}
 	
 	
