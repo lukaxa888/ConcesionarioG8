@@ -6,12 +6,8 @@ public class Test {
 		Menu m1 = new Menu();
 		
 		m1.menu();	
-
-		
+	
 		ConexionBD cb1 = new ConexionBD();
-		
-		
-		
 		
 	}
 
