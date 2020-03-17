@@ -57,16 +57,7 @@ public class Menu {
 		Coche c1=new Coche();
 		Camion ca1=new Camion();
 		int cocheOCamion;
-		String nBastidor;
-		String matricula;
-		String color;
-		int nAsientos;
-		int precio;
-		String tipo;
-		int nSerie;
-		String modelo;
-		String marca;
-		int añoFabricacion;
+
 		do{
 			System.out.println("1 Para XML");
 			System.out.println("2 Para a mano");
@@ -76,19 +67,25 @@ public class Menu {
 		
 		if(numero==2) {
 			
-			
 			do{
 				System.out.println("1 Para coche");
-				System.out.println();
 				System.out.println("2 Para camión");
+				System.out.println();
 				
 				cocheOCamion=Console.readInt();
 				
 			}while(cocheOCamion<1||cocheOCamion>2);
 
+
 			
 			if(cocheOCamion==1) {
 				Coche c11=new Coche();
+
+			
+			if(cocheOCamion==1) {
+				
+				c1.setTipo("coche");
+
 				
 				System.out.println("Dame el numero de bastidor");
 				c11.setnBastidor(Console.readString());
@@ -99,8 +96,11 @@ public class Menu {
 				System.out.println("Dame el número de asientos");
 				c11.setnAsientos(Console.readInt());
 				System.out.println("¿Por cuanto has comprado el coche?");
+
 				c11.setPrecio(Console.readInt());
-				tipo="coche";
+
+				c1.setPrecio(Console.readInt());
+
 				System.out.println("Dame el número de série");
 				c11.setnSerie(Console.readInt());
 				System.out.println("Dame el modelo");
@@ -109,41 +109,10 @@ public class Menu {
 				c11.setMarca(Console.readString());
 				System.out.println("Dame el año de fabricación");
 
-				c11.setAñoFabricacion(Console.readInt());
 
-			System.out.println("Dame el numero de bastidor");
-			nBastidor = Console.readString();
-			System.out.println("Dame la matrícula");
-			matricula = Console.readString();
-			System.out.println("Dame el color");
-			color = Console.readString();
-			System.out.println("Dame el número de asientos");
-			nAsientos = Console.readInt();
-			System.out.println("¿Por cuanto has comprado el coche?");
-			precio = Console.readInt();
-			
-			System.out.println("Dame el número de série");
-			nSerie = Console.readInt();
-			System.out.println("Dame el modelo");
-			modelo =  Console.readString();
-			System.out.println("Dame la marca");
-			marca = Console.readString();
-			System.out.println("Dame el año de fabricación");
-			añoFabricacion =  Console.readInt();
-			if(cocheOCamion==1) {
-				c11.setTipo("Coche");
-				c11.setnBastidor(nBastidor);
-				c11.setMatricula(matricula);
-				c11.setColor(color);
-				c11.setnAsientos(nAsientos);
-				c11.setPrecio(precio);
-				c11.setnSerie(nSerie);
-				c11.setModelo(modelo);
-				c11.setMarca(marca);
-				c11.setAñoFabricacion(añoFabricacion);
-				
-				
-				
+				c11.setAñoFabricacion(Console.readInt());
+		
+
 				System.out.println("Dame el número de puertas");
 				c11.setnPuertas(Console.readInt());
 				System.out.println("¿Cúal es la capacidad del maletero?");
@@ -158,6 +127,8 @@ public class Menu {
 			}
 			if(cocheOCamion==2) {
 				
+				ca1.setTipo("camion");
+				
 				System.out.println("Dame el numero de bastidor");
 				ca1.setnBastidor(Console.readString());
 				System.out.println("Dame la matrícula");
@@ -168,7 +139,6 @@ public class Menu {
 				ca1.setnAsientos(Console.readInt());
 				System.out.println("¿Por cuanto has comprado el coche?");
 				ca1.setPrecio(Console.readInt());
-				tipo="camion";
 				System.out.println("Dame el número de série");
 				ca1.setnSerie(Console.readInt());
 				System.out.println("Dame el modelo");
@@ -178,17 +148,9 @@ public class Menu {
 				System.out.println("Dame el año de fabricación");
 				ca1.setAñoFabricacion(Console.readInt());
 
+
 				ca1.setTipo("Camion");				
 			
-				ca1.setnBastidor(nBastidor);
-				ca1.setMatricula(matricula);
-				ca1.setColor(color);
-				ca1.setnAsientos(nAsientos);
-				ca1.setPrecio(precio);
-				ca1.setnSerie(nSerie);
-				ca1.setModelo(modelo);
-				ca1.setMarca(marca);
-				ca1.setAñoFabricacion(añoFabricacion);
 
 				System.out.println("¿Cúal es la capacidad maxima de la carga");
 				ca1.setCarga(Console.readInt());
@@ -205,19 +167,15 @@ public class Menu {
 			
 			}
 			
-		}
-		
-		if(numero==1) {
-			
-			xm1.leerXML();
-			
-		}
-		
-		
+			}
 		
 	}
 	
 	
 	
+
 	}
 }
+
+
+

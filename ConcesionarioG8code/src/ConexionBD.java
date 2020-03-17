@@ -27,7 +27,11 @@ import com.mysql.cj.MysqlConnection;
 	    	try {
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
+
 	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
+
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
+
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
 	            conexion = null;
@@ -78,22 +82,27 @@ import com.mysql.cj.MysqlConnection;
 	      * Método que inserta un valor introducido por teclado en la tabla definida"
 	      */
 	     public void insertarVehiculo(Vehiculo V1) {
-	         
+	    	 String Query = new String();
+	    	 String Query2 = new String();
 	    	 
-	    	
-	    	 if(V1.getTipo()=="Coche") {
+	    	 if(V1.getTipo().equals("coche")) {
 	    		 Coche C1=(Coche)V1;
-	    		 String Query = "INSERT INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+","+C1.getnBastidor()+")";
-	    		 System.out.println("Se ha insertado un coche con "+C1.getnPuertas()+" puertas "+C1.getCapacidadMaletero()+ "de maletero y numero de bastidor "+C1.getnBastidor());
+	    		 Query2 = "INSERT INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
+	    		 Query = "INSERT INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
+	    		 System.out.println(Query);
+	    		 System.out.println("Se ha insertado un coche con "+C1.getnPuertas()+" puertas "+C1.getCapacidadMaletero()+ " de maletero y numero de bastidor "+C1.getnBastidor());
 	    	 }
 	    	 
-	    	 if(V1.getTipo()=="Camion") {
+	    	 if(V1.getTipo().equals("camion")) {
 	    		 Camion Cam1=(Camion)V1;
-	    		 String Query = "INSERT INTO coche VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+","+Cam1.getnBastidor()+")";
+	    		 Query = "INSERT INTO coche VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+","+Cam1.getnBastidor()+")";
 	    		 System.out.println("Se ha insertado un camion con "+Cam1.getCarga()+" de carga, mercancía de tipo "+Cam1.getTipoMercancia()+" y numero de bastidor "+Cam1.getnBastidor());
 	    	 }
 	                try {
 						Statement st = conexion.createStatement();
+						st.executeQuery("USE concesionario");
+						st.executeUpdate(Query2);
+						st.executeUpdate(Query);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -107,10 +116,9 @@ import com.mysql.cj.MysqlConnection;
 	 public static void main(String[] args) {
 		 //Scanner teclado = new Scanner(System.in);
 		 ConexionBD db = new ConexionBD();
-
+  
         
-        
-        db.verDatos("camion");
+        db.verDatos("coche");
     
      }
 	
