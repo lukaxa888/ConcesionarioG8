@@ -92,9 +92,9 @@ import com.mysql.cj.MysqlConnection;
 	    	 
 	    	 if(V1.getTipo().equals("coche")) {
 	    		 Coche C1=(Coche)V1;
-	    		 Query = "INSERT INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
+	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
 	    		 //System.out.println(Query);
-	    		 Query2 = "INSERT INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
+	    		 Query2 = "INSERT IGNORE INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
 	    		 //System.out.println(Query2);
 	    		 Query3 = "INSERT IGNORE INTO serie VALUES("+C1.getnSerie() + ",\"" + C1.getMarca()+ "\",\""+C1.getModelo()+"\","+C1.getAñoFabricacion()+")";
 	    		 //System.out.println(Query3);
@@ -104,9 +104,9 @@ import com.mysql.cj.MysqlConnection;
 	    	 
 	    	 if(V1.getTipo().equals("camion")) {
 	    		 Camion Cam1=(Camion)V1;
-	    		 Query = "INSERT INTO vehiculo VALUES(\"" +Cam1.getnBastidor()+ "\",\"" +Cam1.getMatricula()+ "\",\"" +Cam1.getColor()+ "\","+Cam1.getnAsientos()+","+Cam1.getPrecio()+","+Cam1.getnSerie()+",\""+Cam1.getTipo()+"\")";
+	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +Cam1.getnBastidor()+ "\",\"" +Cam1.getMatricula()+ "\",\"" +Cam1.getColor()+ "\","+Cam1.getnAsientos()+","+Cam1.getPrecio()+","+Cam1.getnSerie()+",\""+Cam1.getTipo()+"\")";
 	    		 //System.out.println(Query);
-	    		 Query2 = "INSERT INTO camion VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+ ",\"" +Cam1.getnBastidor()+"\")";
+	    		 Query2 = "INSERT IGNORE INTO camion VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+ ",\"" +Cam1.getnBastidor()+"\")";
 	    		 //System.out.println(Query2);
 	    		 Query3 = "INSERT IGNORE INTO serie VALUES("+Cam1.getnSerie() + ",\"" + Cam1.getMarca()+ "\",\""+Cam1.getModelo()+"\","+Cam1.getAñoFabricacion()+")";
 	    		 //System.out.println(Query3);

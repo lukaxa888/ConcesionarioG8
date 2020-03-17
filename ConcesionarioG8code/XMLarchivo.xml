@@ -16,7 +16,7 @@
     <Numero_asientos>4</Numero_asientos>
     <Precio>11548</Precio>
     <Serie_Numero_serie>1</Serie_Numero_serie>
-    <Tipo>camion</Tipo>
+    <Tipo>coche</Tipo>
 </vehiculo>
 <vehiculo>
     <Numero_bastidor>ODO12345456</Numero_bastidor>
@@ -25,6 +25,6 @@
     <Numero_asientos>3</Numero_asientos>
     <Precio>10548</Precio>
     <Serie_Numero_serie>3</Serie_Numero_serie>
-    <Tipo>camion</Tipo>
+    <Tipo>coche</Tipo>
 </vehiculo>
 </concesionario>

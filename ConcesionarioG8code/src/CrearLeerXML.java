@@ -104,11 +104,19 @@ public class CrearLeerXML {
                 if(nodo.getNodeType() == Node.ELEMENT_NODE) {
                     
                 	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                	c1.setMatricula(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+                	//c1.setnAsientos(element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+                	//c1.setPrecio(element.getElementsByTagName("Precio").item(0).getTextContent());
+                	//c1.setnSerie(element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+                	
+                	
                 	
                     System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
                     System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
                     System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
-                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getNodeType());
                     System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
                     System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
                     System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
@@ -194,7 +202,9 @@ public class CrearLeerXML {
 
 public static void main(String[] args) {
 	
+	CrearLeerXML ma = new CrearLeerXML();
 	
+	ma.leerXML();
 	
 	
 	
