@@ -1,6 +1,15 @@
+
 import java.io.File;
+import java.sql.Connection;	
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,32 +30,51 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 
-/**
- *
- * @author xcheko51x
- */
 public class CrearLeerXML {
-
+	
+	
+	
+	Scanner teclado = new Scanner(System.in);
+	
+    static Connection conexion = null;
+    Statement comando = null;
+    ResultSet registro;
+    String nombreTabla;
+    	    
     /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        String nomArchivo = "Concesionario";
+	  * Conecta el objeto a la base de datos configurada en el método al crear un objeto ConexionBD
+	  */ 
+    public CrearLeerXML() {
+    	try {
+            //Driver JDBC
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
+
         
-        List<vehiculo_xml> listaUsuarios = new ArrayList<vehiculo_xml>();
-        
-        listaUsuarios.add(new vehiculo_xml(1, "Sergio", "234242543543"));
-        listaUsuarios.add(new vehiculo_xml(2, "Laura", "76865542424"));
-        
+
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            conexion = null;
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+            conexion = null;
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        	conexion = null;
+        }
+    
+	
+	
+          
         try {
-            crearXML(nomArchivo, listaUsuarios);
             leerXML();
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
     
-    public static void leerXML() {
+    public void leerXML() {
     	
     	try {
             System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
@@ -63,78 +91,125 @@ public class CrearLeerXML {
             
             NodeList listavehiculo = document.getElementsByTagName("vehiculo");
             
+            
+             Coche c1 = new Coche();
+     
+            
             for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
                 Node nodo = listavehiculo.item(i);
                 System.out.println("Elemento: " + nodo.getNodeName());
                 
+                Element element = (Element) nodo;
+                
                 if(nodo.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) nodo;
+                    
+                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                	c1.setMatricula(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+                	//c1.setnAsientos(element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+                	//c1.setPrecio(element.getElementsByTagName("Precio").item(0).getTextContent());
+                	//c1.setnSerie(element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+                	
+                	
+                	
                     System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
                     System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
                     System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
-                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getNodeType());
                     System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
-                    System.out.println("Serioe_Numero_serie: " + element.getElementsByTagName("Serioe_Numero_serie").item(0).getTextContent());
+                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
                     System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
                     
                     System.out.println("");
                 }
+                            
+               
+                   
             }
             
-        } catch(Exception e) {
-           System.out.println();
-        	System.out.println("No se encuentra el archivo, saliendo al menú...");
-           System.out.println();
-        	// e.printStackTrace();   
+				}
+				
+		catch(Exception e) {
+			e.printStackTrace(); 
         }
- 	
-    }
     
-    public static void crearXML(String nomArchivo, List<vehiculo_xml> listaUsuarios) throws ParserConfigurationException, TransformerConfigurationException, TransformerException {
+    	
+    	
+    
+    
+    /*
+    try {
+        // Creo una instancia de DocumentBuilderFactory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            DOMImplementation implementation = builder.getDOMImplementation();
-            Document document = implementation.createDocument(null, nomArchivo, null);
-            document.setXmlVersion("1.0");
-            
-            // NODO RAIZ
-            Element raiz = document.getDocumentElement();
-            
-            for(int i = 0 ; i <listaUsuarios.size() ; i++) {
-                Element itemNode = document.createElement("USUARIO");
-                
-                Element idNode = document.createElement("ID");
-                Text nodeIdValue =document.createTextNode("" +  listaUsuarios.get(i).getIdUsuario());
-                idNode.appendChild(nodeIdValue);
-                
-                Element nombreNode = document.createElement("NOMBRE");
-                Text nodeNombreValue =document.createTextNode(listaUsuarios.get(i).getNombre());
-                nombreNode.appendChild(nodeNombreValue);
-                
-                Element telefonoNode = document.createElement("TELEFONO");
-                Text nodeTelefonoValue =document.createTextNode(listaUsuarios.get(i).getTelefono());
-                telefonoNode.appendChild(nodeTelefonoValue);
-                
-                itemNode.appendChild(idNode);
-                itemNode.appendChild(nombreNode);
-                itemNode.appendChild(telefonoNode);
-                
-                raiz.appendChild(itemNode);
-            }
-            
-            // GENERA XML
-            Source source = new DOMSource(document);
-            
-            // DONDE SE GUARDARA
-            Result result = new StreamResult(new java.io.File(nomArchivo + ".xml"));
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.transform(source, result);
-        
-        } catch(ParserConfigurationException e) {
-            
-        }
+        // Creo un documentBuilder
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        // Creo un DOMImplementation
+        DOMImplementation implementation = builder.getDOMImplementation();
+
+        // Creo un documento con un elemento raiz
+        Document documento = implementation.createDocument(null, "concesionario", null);
+        documento.setXmlVersion("1.0");
+
+        // Creo los elementos
+        Element vehiculo = documento.createElement("vehiculo");
+        Element coche = documento.createElement("coche");
+
+        // Matricula
+        Element matricula = documento.createElement("matricula");
+        Text textMatricula = documento.createTextNode("");
+        matricula.appendChild(textMatricula);
+        coche.appendChild(matricula);
+
+        // Marca
+        Element marca = documento.createElement("marca");
+        Text textMarca = documento.createTextNode("AUDI");
+        marca.appendChild(textMarca);
+        coche.appendChild(marca);
+
+        // Precio
+        Element precio = documento.createElement("precio");
+        Text textPrecio = documento.createTextNode("30000");
+        precio.appendChild(textPrecio);
+        coche.appendChild(precio);
+
+        // Añado al elemento coches el elemento coche
+        vehiculo.appendChild(coche);
+
+        // Añado al root el elemento coches
+        documento.getDocumentElement().appendChild(vehiculo);
+
+        // Asocio el source con el Document
+        Source source = new DOMSource(documento);
+        // Creo el Result, indicado que fichero se va a crear
+        Result result = new StreamResult(new File("concesionario.xml"));
+
+        // Creo un transformer, se crea el fichero XML
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(source, result);
+
+    } catch (ParserConfigurationException | TransformerException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+    */
     }
     
+
+
+
+
+
+public static void main(String[] args) {
+	
+	CrearLeerXML ma = new CrearLeerXML();
+	
+	ma.leerXML();
+	
+	
+	
+	
+	
 }
+}
+

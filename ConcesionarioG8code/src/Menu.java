@@ -1,3 +1,13 @@
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 public class Menu {
 
 	CrearLeerXML xm1 = null;
@@ -167,6 +177,7 @@ public class Menu {
 		ConexionBD cbd = new ConexionBD();
 	
 		int numero;
+
 		Coche c1=new Coche();
 		Camion ca1=new Camion();
 		int cocheOCamion;
@@ -181,6 +192,83 @@ public class Menu {
 			numero=Console.readInt();
 			
 		} while(numero<1||numero>2);
+		
+		if(numero==1) {
+			
+			
+			try {
+	            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
+	            String nombrexml = Console.readString();
+	            File archivo = new File(nombrexml+".xml");
+	            
+	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+	            Document document = documentBuilder.parse(archivo);
+	            
+	            document.getDocumentElement().normalize();
+	            
+	            System.out.println("Elemento raiz: " + document.getDocumentElement().getNodeName());
+	            
+	            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
+	            
+	            
+	            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
+	                Node nodo = listavehiculo.item(i);
+	                System.out.println("Elemento: " + nodo.getNodeName());
+	                
+	                Element element = (Element) nodo;
+	                
+	                if(nodo.getNodeType() == Node.ELEMENT_NODE) {
+	                    
+	                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                	c1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+	                	c1.setnAsientos(element.getElementsByTagName("Numero_asientos").item(0).getNodeType());
+	                	c1.setPrecio(element.getElementsByTagName("Precio").item(0).getNodeType());
+	                	c1.setnSerie(element.getElementsByTagName("Serie_Numero_serie").item(0).getNodeType());
+	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                	
+	                	
+	                	
+	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
+	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
+	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                    
+	                    System.out.println("");
+	                    
+	                    cbd.insertarVehiculo(c1);
+	                }
+	                            
+	               
+	                   
+	            }
+	            
+					}
+					
+			catch(Exception e) {
+				e.printStackTrace(); 
+	        }
+			
+			
+			
+			System.out.println();
+			System.out.println("¡Has insertado un coche con exito!");
+			System.out.println();
+			
+			
+			
+			
+			if (c1.getTipo() == "coche")
+			{
+				
+			}
+			
+		}
+		
 		
 		if(numero==2) {
 			
@@ -270,3 +358,5 @@ public class Menu {
 	
 	
 }
+
+

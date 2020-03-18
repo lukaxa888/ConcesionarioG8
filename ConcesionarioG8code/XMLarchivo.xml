@@ -5,8 +5,8 @@
     <Matricula>1496VHE</Matricula>
     <Color>blanco</Color>
     <Numero_asientos>3</Numero_asientos>
-    <Precio>15.548€</Precio>
-    <Serioe_Numero_serie>2</Serioe_Numero_serie>
+    <Precio>15548</Precio>
+    <Serie_Numero_serie>2</Serie_Numero_serie>
     <Tipo>coche</Tipo>
 </vehiculo>
 <vehiculo>
@@ -14,17 +14,17 @@
     <Matricula>1056VLE</Matricula>
     <Color>rojo</Color>
     <Numero_asientos>4</Numero_asientos>
-    <Precio>11.548€</Precio>
-    <Serioe_Numero_serie>1</Serioe_Numero_serie>
-    <Tipo>camion</Tipo>
+    <Precio>11548</Precio>
+    <Serie_Numero_serie>1</Serie_Numero_serie>
+    <Tipo>coche</Tipo>
 </vehiculo>
 <vehiculo>
     <Numero_bastidor>ODO12345456</Numero_bastidor>
     <Matricula>1406LHE</Matricula>
     <Color>negro</Color>
-    <Numero_asientos>650</Numero_asientos>
-    <Precio>10.548€</Precio>
-    <Serioe_Numero_serie>3</Serioe_Numero_serie>
-    <Tipo>camion</Tipo>
+    <Numero_asientos>3</Numero_asientos>
+    <Precio>10548</Precio>
+    <Serie_Numero_serie>3</Serie_Numero_serie>
+    <Tipo>coche</Tipo>
 </vehiculo>
 </concesionario>

@@ -11,6 +11,7 @@ public abstract class Vehiculo {
 	private String marca;
 	private int añoFabricacion;
 	
+	
 	public String getnBastidor() {
 		return nBastidor;
 	}
