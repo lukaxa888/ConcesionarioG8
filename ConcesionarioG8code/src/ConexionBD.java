@@ -116,8 +116,8 @@ import com.mysql.cj.MysqlConnection;
 	                try {
 						Statement st = conexion.createStatement();
 						st.executeQuery("USE concesionario");
-						st.executeUpdate(Query3);
 						st.executeUpdate(Query);
+						st.executeUpdate(Query3);
 						st.executeUpdate(Query2);
 					} catch (SQLException e) {
 						e.printStackTrace();

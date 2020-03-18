@@ -74,8 +74,10 @@ public class CrearLeerXML {
         }
     }
     
+    
+    
     public void leerXML() {
-    	
+    	/*
     	try {
             System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
             String nombrexml = Console.readString();
@@ -136,9 +138,9 @@ public class CrearLeerXML {
     
     	
     	
+    */
     
     
-    /*
     try {
         // Creo una instancia de DocumentBuilderFactory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -153,30 +155,51 @@ public class CrearLeerXML {
 
         // Creo los elementos
         Element vehiculo = documento.createElement("vehiculo");
-        Element coche = documento.createElement("coche");
+        
+        // Numero_bastidor
+        Element Numero_bastidor = documento.createElement("Numero_bastidor");
+        Text textNumero_bastidor = documento.createTextNode("sdf13214");
+        Numero_bastidor.appendChild(textNumero_bastidor);
+        vehiculo.appendChild(Numero_bastidor);
 
         // Matricula
-        Element matricula = documento.createElement("matricula");
-        Text textMatricula = documento.createTextNode("");
+        Element matricula = documento.createElement("Matricula");
+        Text textMatricula = documento.createTextNode("GRE1245");
         matricula.appendChild(textMatricula);
-        coche.appendChild(matricula);
+        vehiculo.appendChild(matricula);
 
-        // Marca
-        Element marca = documento.createElement("marca");
-        Text textMarca = documento.createTextNode("AUDI");
-        marca.appendChild(textMarca);
-        coche.appendChild(marca);
+        // Color
+        Element color = documento.createElement("Color");
+        Text textColor = documento.createTextNode("Verde");
+        color.appendChild(textColor);
+        vehiculo.appendChild(color);
+        
+        // Numero_asientos
+        Element numero_asientos = documento.createElement("Numero_asientos");
+        Text textNumero_asientos = documento.createTextNode("2");
+        numero_asientos.appendChild(textNumero_asientos);
+        vehiculo.appendChild(numero_asientos);
 
         // Precio
-        Element precio = documento.createElement("precio");
+        Element precio = documento.createElement("Precio");
         Text textPrecio = documento.createTextNode("30000");
         precio.appendChild(textPrecio);
-        coche.appendChild(precio);
+        vehiculo.appendChild(precio);
+        
+        // Numero_serie
+        Element serie_numero_serie = documento.createElement("Serie_numero_serie");
+        Text textSerie_numero_serie = documento.createTextNode("30000");
+        serie_numero_serie.appendChild(textSerie_numero_serie);
+        vehiculo.appendChild(serie_numero_serie);
+        
+        // Tipo
+        Element tipo = documento.createElement("Tipo");
+        Text textTipo = documento.createTextNode("coche");
+        tipo.appendChild(textTipo);
+        vehiculo.appendChild(tipo);
 
-        // Añado al elemento coches el elemento coche
-        vehiculo.appendChild(coche);
 
-        // Añado al root el elemento coches
+        // Añado al root el elemento vehiculo
         documento.getDocumentElement().appendChild(vehiculo);
 
         // Asocio el source con el Document
@@ -192,8 +215,8 @@ public class CrearLeerXML {
         System.out.println(ex.getMessage());
     }
 }
-    */
-    }
+    
+    
     
 
 
