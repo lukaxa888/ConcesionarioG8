@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,6 +17,10 @@ public class Menu {
 	Menu(){
 		
 		
+	}
+	
+	public void Correcionnumeros() throws NumberFormatException {
+		System.out.println("Introduce numeros, no eso");
 	}
 	
 	void menutexto() {
@@ -39,13 +44,14 @@ public class Menu {
 	
 	void menu() {
 		boolean salir=false;
-		int numero;
+		int numero = 0;
 		
 		while(salir==false) {
 			do {
 				menutexto();
 				System.out.print("Introduzca una opción: ");
 				numero =  Console.readInt();
+				
 				if(numero < 1 || numero > 5 ) {
 					System.out.println("Error. Se debe introducir un número entre 1 y 5");
 				}
@@ -82,7 +88,7 @@ public class Menu {
 	void stock() {
 		ConexionBD cbd = new ConexionBD();
 		
-		int numTipo;		
+		int numTipo = 0;
 		
 		do {
 			System.out.println("VEHÍCULOS EN STOCK");
@@ -109,7 +115,7 @@ public class Menu {
 	void vender() {
 		ConexionBD cbd = new ConexionBD();
 		
-		int numTipo;
+		int numTipo = 0;
 		Coche c1=new Coche();
 		Camion ca1=new Camion();		
 		
@@ -119,7 +125,7 @@ public class Menu {
 			System.out.println("Que desea vender?");
 			System.out.println("1-> COCHE");
 			System.out.println("2-> CAMION");
-			numTipo = Console.readInt();
+			numTipo = Console.readInt();				
 		} while(numTipo<1||numTipo>2);
 		
 		System.out.println("Introduce un bastidor para borrar:");
@@ -140,17 +146,17 @@ public class Menu {
 	void pintar() {
 		ConexionBD cbd = new ConexionBD();
 		
-		int numTipo;
+		int numTipo = 0;
 		Coche c1=new Coche();
-		Camion ca1=new Camion();		
-		
-		do {
+		Camion ca1=new Camion();	
+
+		do {		
 			System.out.println("SISTEMA DE PINTADO");
 			System.out.println("-------------------------------------------");
 			System.out.println("Que desea pintar?");
 			System.out.println("1-> COCHE");
-			System.out.println("2-> CAMION");
-			numTipo = Console.readInt();
+			System.out.println("2-> CAMION");			
+			numTipo = Console.readInt();			
 		} while(numTipo<1||numTipo>2);
 		
 		System.out.println("Introduce un bastidor para pintar:");
@@ -170,17 +176,19 @@ public class Menu {
 			ca1.setColor(nuevoColor);
 			cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
 		}
+		
+		
 		cbd.desconectarMYSQL();
 	}
 	
 	void comprar() {
 		ConexionBD cbd = new ConexionBD();
 	
-		int numero;
+		int numero = 0;
 
 		Coche c1=new Coche();
 		Camion ca1=new Camion();
-		int cocheOCamion;
+		int cocheOCamion = 0;
 
 		System.out.println("SISTEMA DE COMPRA");
 		System.out.println("-------------------------------");
@@ -190,11 +198,9 @@ public class Menu {
 			System.out.println("1-> ARCHIVO XML");
 			System.out.println("2-> INTRODUCIR DATOS A MANO");
 			numero=Console.readInt();
-			
 		} while(numero<1||numero>2);
 		
 		if(numero==1) {
-			
 			
 			try {
 	            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
@@ -228,8 +234,6 @@ public class Menu {
 	                	c1.setnSerie(element.getElementsByTagName("Serie_Numero_serie").item(0).getNodeType());
 	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
 	                	
-	                	
-	                	
 	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
 	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
 	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
@@ -242,30 +246,14 @@ public class Menu {
 	                    
 	                    cbd.insertarVehiculo(c1);
 	                }
-	                            
-	               
 	                   
 	            }
 	            
-					}
+				}
 					
 			catch(Exception e) {
 				e.printStackTrace(); 
 	        }
-			
-			
-			
-			System.out.println();
-			System.out.println("¡Has insertado un coche con exito!");
-			System.out.println();
-			
-			
-			
-			
-			if (c1.getTipo() == "coche")
-			{
-				
-			}
 			
 		}
 		
@@ -277,7 +265,7 @@ public class Menu {
 				System.out.println("2 Para camión");
 				System.out.println();
 				
-				cocheOCamion=Console.readInt();
+					cocheOCamion=Console.readInt();
 				
 			} while(cocheOCamion<1||cocheOCamion>2);
 			
@@ -286,33 +274,39 @@ public class Menu {
 				c1.setTipo("coche");
 				
 				System.out.println("Numero de bastidor:");
-				c1.setnBastidor(Console.readString());
+					c1.setnBastidor(Console.readString());
+			
 				System.out.println("Matrícula:");
-				c1.setMatricula(Console.readString());
+					c1.setMatricula(Console.readString());
+				
 				System.out.println("Color:");
-				c1.setColor(Console.readString());
+					c1.setColor(Console.readString());
+				
 				System.out.println("Número de asientos:");
-				c1.setnAsientos(Console.readInt());
+					c1.setnAsientos(Console.readInt());
+					
 				System.out.println("Precio pagado:");
-				c1.setPrecio(Console.readInt());
+					c1.setPrecio(Console.readInt());
+				
 				System.out.println("Número de serie:");
-				c1.setnSerie(Console.readInt());
+					c1.setnSerie(Console.readInt());
+				
 				System.out.println("Marca:");
-				c1.setMarca(Console.readString());
+					c1.setMarca(Console.readString());
+				
 				System.out.println("Modelo:");
-				c1.setModelo(Console.readString());
+					c1.setModelo(Console.readString());
+				
 				System.out.println("Año de fabricación:");
-				c1.setAñoFabricacion(Console.readInt());				
+					c1.setAñoFabricacion(Console.readInt());
+				
 				System.out.println("Número de puertas:");
-				c1.setnPuertas(Console.readInt());
+					c1.setnPuertas(Console.readInt());
+				
 				System.out.println("Capacidad de maletero:");
-				c1.setCapacidadMaletero(Console.readInt());
+					c1.setCapacidadMaletero(Console.readInt());
 			
 				cbd.insertarVehiculo(c1);
-			
-				System.out.println();
-				System.out.println("¡Has insertado un coche con exito!");
-				System.out.println();
 			
 			}
 			
@@ -321,33 +315,39 @@ public class Menu {
 				ca1.setTipo("camion");
 				
 				System.out.println("Numero de bastidor:");
-				ca1.setnBastidor(Console.readString());
+					ca1.setnBastidor(Console.readString());
+					
 				System.out.println("Matrícula:");
-				ca1.setMatricula(Console.readString());
+					ca1.setMatricula(Console.readString());
+					
 				System.out.println("Color:");
-				ca1.setColor(Console.readString());
+					ca1.setColor(Console.readString());
+					
 				System.out.println("Número de asientos:");
-				ca1.setnAsientos(Console.readInt());
+					ca1.setnAsientos(Console.readInt());
+					
 				System.out.println("Precio pagado:");
-				ca1.setPrecio(Console.readInt());
+					ca1.setPrecio(Console.readInt());
+					
 				System.out.println("Número de série:");
-				ca1.setnSerie(Console.readInt());
+					ca1.setnSerie(Console.readInt());
+					
 				System.out.println("Marca:");
-				ca1.setMarca(Console.readString());
+					ca1.setMarca(Console.readString());
+				
 				System.out.println("Modelo:");
-				ca1.setModelo(Console.readString());
+					ca1.setModelo(Console.readString());
+				
 				System.out.println("Año de fabricación:");
-				ca1.setAñoFabricacion(Console.readInt());
+					ca1.setAñoFabricacion(Console.readInt());
+					
 				System.out.println("Capacidad máx. de carga:");
-				ca1.setCarga(Console.readInt());
+					ca1.setCarga(Console.readInt());
+					
 				System.out.println("Tipo de mercancía:");
-				ca1.setTipoMercancia(Console.readString());;
+					ca1.setTipoMercancia(Console.readString());
 				
 				cbd.insertarVehiculo(ca1);
-				
-				System.out.println();
-				System.out.println("¡Has insertado un camión con exito!");
-				System.out.println();
 			
 			}
 			

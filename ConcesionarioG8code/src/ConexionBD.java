@@ -28,9 +28,7 @@ import com.mysql.cj.MysqlConnection;
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
-
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=mysql&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
 
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
@@ -75,7 +73,7 @@ import com.mysql.cj.MysqlConnection;
 	                	   
 	                	   System.out.println("");
 	                } 
-	            	
+	            
 	            } catch (SQLException ex) {
 	            	ex.printStackTrace();
 	            }
@@ -98,8 +96,10 @@ import com.mysql.cj.MysqlConnection;
 	    		 //System.out.println(Query2);
 	    		 Query3 = "INSERT IGNORE INTO serie VALUES("+C1.getnSerie() + ",\"" + C1.getMarca()+ "\",\""+C1.getModelo()+"\","+C1.getAñoFabricacion()+")";
 	    		 //System.out.println(Query3);
+	    		 
 	    		 //INSERT IGNORE sirve para que si existe un valor igual no te haga insert. Si no existe si que te lo inserta.
 	    		 System.out.println("Se ha insertado un coche con "+C1.getnPuertas()+" puertas "+C1.getCapacidadMaletero()+ " de maletero y numero de bastidor "+C1.getnBastidor());
+	    		 System.out.println();
 	    	 }
 	    	 
 	    	 if(V1.getTipo().equals("camion")) {
@@ -111,6 +111,7 @@ import com.mysql.cj.MysqlConnection;
 	    		 Query3 = "INSERT IGNORE INTO serie VALUES("+Cam1.getnSerie() + ",\"" + Cam1.getMarca()+ "\",\""+Cam1.getModelo()+"\","+Cam1.getAñoFabricacion()+")";
 	    		 //System.out.println(Query3);
 	    		 System.out.println("Se ha insertado un camion con "+Cam1.getCarga()+" de carga, mercancía "+Cam1.getTipoMercancia()+ " y numero de bastidor "+Cam1.getnBastidor());
+	    		 System.out.println();
 	    	 }
 	                try {
 						Statement st = conexion.createStatement();

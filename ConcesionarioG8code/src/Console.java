@@ -15,8 +15,8 @@ public class Console {
 		try {
 			x = Byte.valueOf(in.readLine());
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error");
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
