@@ -212,22 +212,53 @@ public class Menu {
 	            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
 	            
 	            
+	            
+	            
 	            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
 	                Node nodo = listavehiculo.item(i);
 	                System.out.println("Elemento: " + nodo.getNodeName());
 	                
 	                Element element = (Element) nodo;
 	                
-	                if(nodo.getNodeType() == Node.ELEMENT_NODE) {
+	                String numasientos = element.getElementsByTagName("Numero_asientos").item(0).getTextContent();
+	                String precio = element.getElementsByTagName("Precio").item(0).getTextContent();
+	                String numserie = element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent();
+	                
+	                
+	                if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("camion")) {
+	                    
+	                	ca1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                	ca1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                	ca1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+	                	ca1.setnAsientos(Integer.parseInt(numasientos));
+	                	ca1.setPrecio(Integer.parseInt(precio));
+	                	ca1.setnSerie(Integer.parseInt(numserie));
+	                	ca1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                	
+	                	
+	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
+	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
+	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                    
+	                    System.out.println("");
+	                    
+	                    cbd.insertarVehiculo(ca1);
+	                    
+	                } 
+	                
+	                	if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("coche")) {
 	                    
 	                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
 	                	c1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
 	                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
-	                	c1.setnAsientos(element.getElementsByTagName("Numero_asientos").item(0).getNodeType());
-	                	c1.setPrecio(element.getElementsByTagName("Precio").item(0).getNodeType());
-	                	c1.setnSerie(element.getElementsByTagName("Serie_Numero_serie").item(0).getNodeType());
+	                	c1.setnAsientos(Integer.parseInt(numasientos));
+	                	c1.setPrecio(Integer.parseInt(precio));
+	                	c1.setnSerie(Integer.parseInt(numserie));
 	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                	
 	                	
 	                	
 	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
@@ -241,9 +272,8 @@ public class Menu {
 	                    System.out.println("");
 	                    
 	                    cbd.insertarVehiculo(c1);
-	                }
-	                            
-	               
+	                    
+	                } 
 	                   
 	            }
 	            
