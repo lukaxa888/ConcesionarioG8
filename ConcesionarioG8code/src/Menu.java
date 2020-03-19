@@ -112,6 +112,9 @@ public class Menu {
 		cbd.desconectarMYSQL();
 	}	
 	
+	/**
+	 * Vende y manda a la tabla "historial" el vehiculo con numero de bastidor introducido.
+	 */
 	void vender() {
 		ConexionBD cbd = new ConexionBD();
 		
@@ -143,44 +146,68 @@ public class Menu {
 		cbd.desconectarMYSQL();
 	}	
 	
+	/**
+	 * Dependiendo de la opcion elegida: listar vehiculos pintados del color introducido o pintar un vehiculo (camnbiar color)
+	 */
 	void pintar() {
 		ConexionBD cbd = new ConexionBD();
 		
 		int numTipo = 0;
+		int numAccion=0;
 		Coche c1=new Coche();
 		Camion ca1=new Camion();	
 
 		do {		
 			System.out.println("SISTEMA DE PINTADO");
 			System.out.println("-------------------------------------------");
-			System.out.println("Que desea pintar?");
-			System.out.println("1-> COCHE");
-			System.out.println("2-> CAMION");			
-			numTipo = Console.readInt();			
-		} while(numTipo<1||numTipo>2);
+			System.out.println("Acciones:");
+			System.out.println("1-> LISTAR VEHICULOS PINTADOS");
+			System.out.println("2-> PINTAR VEHÍCULO");
+			numAccion = Console.readInt();
+		} while(numAccion<1||numAccion>2);
 		
-		System.out.println("Introduce un bastidor para pintar:");
-		String numBastidor=Console.readString();
-		
-		System.out.println("Introduce un color nuevo para el vehículo:");
-		String nuevoColor=Console.readString();
-		
-		if(numTipo==1) {
-			c1.setnBastidor(numBastidor);
-			c1.setColor(nuevoColor);
-			cbd.pintarVehiculo(c1.getnBastidor(),c1.getColor());
+		if (numAccion==1) {
+			System.out.println("Elige un color:");
+			String color = Console.readString();
+			cbd.vehiculosPintados(color);
 		}
 		
-		if(numTipo==2) {
-			ca1.setnBastidor(numBastidor);
-			ca1.setColor(nuevoColor);
-			cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
+		if (numAccion==2) {
+			
+			do {
+				System.out.println("Que desea pintar?");
+				System.out.println("1-> COCHE");
+				System.out.println("2-> CAMION");			
+				numTipo = Console.readInt();
+			} while(numTipo<1||numTipo>2);
+		
+			System.out.println("Introduce un bastidor para pintar:");
+			String numBastidor=Console.readString();
+		
+			System.out.println("Introduce un color nuevo para el vehículo:");
+			String nuevoColor=Console.readString();
+		
+			if(numTipo==1) {
+				c1.setnBastidor(numBastidor);
+				c1.setColor(nuevoColor);
+				cbd.pintarVehiculo(c1.getnBastidor(),c1.getColor());
+			}
+		
+			if(numTipo==2) {
+				ca1.setnBastidor(numBastidor);
+				ca1.setColor(nuevoColor);
+				cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
+			}
+		
 		}
 		
 		
 		cbd.desconectarMYSQL();
 	}
 	
+	/**
+	 * Introduce un vehiculo con los datos introducidos a la base de datos del concesionario
+	 */
 	void comprar() {
 		ConexionBD cbd = new ConexionBD();
 	
@@ -266,10 +293,6 @@ public class Menu {
 	                	c1.setnSerie(Integer.parseInt(numserie));
 	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
 	                	
-<<<<<<< HEAD
-=======
-	                	
->>>>>>> fc180d3333b0487116daa4ea23b83504780d8b49
 	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
 	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
 	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
@@ -281,23 +304,19 @@ public class Menu {
 	                    System.out.println("");
 	                    
 	                    cbd.insertarVehiculo(c1);
-<<<<<<< HEAD
+
 	                }
-=======
+
 	                    
 	                } 
->>>>>>> fc180d3333b0487116daa4ea23b83504780d8b49
 	                   
 	            }
-	            
-				}
 					
 			catch(Exception e) {
 				e.printStackTrace(); 
 	        }
 			
-		}
-		
+		}		
 		
 		if(numero==2) {
 			
