@@ -28,7 +28,7 @@ import com.mysql.cj.MysqlConnection;
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=mysql&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
 
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
