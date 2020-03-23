@@ -93,7 +93,7 @@ public class Menu {
 		do {
 			System.out.println("VEHÍCULOS EN STOCK");
 			System.out.println("-------------------------------");
-			System.out.println("Que desea listar?");
+			System.out.println("¿Qué desea listar?");
 			System.out.println("1-> COCHES");
 			System.out.println("2-> CAMIONES");
 			numTipo = Console.readInt();
@@ -125,7 +125,7 @@ public class Menu {
 		do {
 			System.out.println("SISTEMA DE VENTA");
 			System.out.println("-------------------------------");
-			System.out.println("Que desea vender?");
+			System.out.println("¿Qué desea vender?");
 			System.out.println("1-> COCHE");
 			System.out.println("2-> CAMION");
 			numTipo = Console.readInt();				
@@ -162,7 +162,7 @@ public class Menu {
 			System.out.println("-------------------------------------------");
 			System.out.println("Acciones:");
 			System.out.println("1-> LISTAR VEHICULOS PINTADOS");
-			System.out.println("2-> PINTAR VEHÍCULO");
+			System.out.println("2-> PINTAR VEHICULO");
 			numAccion = Console.readInt();
 		} while(numAccion<1||numAccion>2);
 		
@@ -175,7 +175,7 @@ public class Menu {
 		if (numAccion==2) {
 			
 			do {
-				System.out.println("Que desea pintar?");
+				System.out.println("¿Qué desea pintar?");
 				System.out.println("1-> COCHE");
 				System.out.println("2-> CAMION");			
 				numTipo = Console.readInt();
@@ -219,7 +219,7 @@ public class Menu {
 
 		System.out.println("SISTEMA DE COMPRA");
 		System.out.println("-------------------------------");
-		System.out.println("Cómo desea introducir el vehículo?");
+		System.out.println("¿Cómo desea introducir el vehículo?");
 		
 		do{
 			System.out.println("1-> ARCHIVO XML");
