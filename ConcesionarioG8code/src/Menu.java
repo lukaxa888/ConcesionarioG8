@@ -16,7 +16,6 @@ public class Menu {
 	
 	Menu(){
 		
-		
 	}
 	
 	public void Correcionnumeros() throws NumberFormatException {
@@ -26,6 +25,7 @@ public class Menu {
 	void menutexto() {
 		
 		System.out.println("\t GESTIÓN DE CONCESIONARIO G8");
+		
 		System.out.println("-----------------------------------------");
 		
 		System.out.println("¿Qué desea hacer?");
@@ -96,8 +96,9 @@ public class Menu {
 			System.out.println("Que desea listar?");
 			System.out.println("1-> COCHES");
 			System.out.println("2-> CAMIONES");
+			System.out.println("3-> TODOS");
 			numTipo = Console.readInt();
-		} while(numTipo<1||numTipo>2);
+		} while(numTipo<1||numTipo>3);
 		
 		if(numTipo==1) {
 			cbd.verDatos("coche");
@@ -106,6 +107,11 @@ public class Menu {
 		
 		if(numTipo==2) {
 			cbd.verDatos("camion");
+			System.out.println();
+		}
+		
+		if(numTipo==3) {
+			cbd.verDatos("vehiculo");
 			System.out.println();
 		}
 		
@@ -321,8 +327,9 @@ public class Menu {
 		if(numero==2) {
 			
 			do{
-				System.out.println("1 Para coche");
-				System.out.println("2 Para camión");
+				System.out.println("Que desea comprar?");
+				System.out.println("1-> COCHE");
+				System.out.println("2-> CAMION");
 				System.out.println();
 				
 					cocheOCamion=Console.readInt();
