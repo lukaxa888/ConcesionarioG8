@@ -17,6 +17,7 @@ public class Menu {
 	Menu(){
 		
 	}
+
 	
 	void menutexto() {
 		
@@ -83,32 +84,49 @@ public class Menu {
 	 */
 	void stock() {
 		ConexionBD cbd = new ConexionBD();
-		
+		int numAccion = 0;
 		int numTipo = 0;
 		
 		do {
 			System.out.println("VEHÍCULOS EN STOCK");
 			System.out.println("-------------------------------");
-			System.out.println("¿Qué desea listar?");
-			System.out.println("1-> COCHES");
-			System.out.println("2-> CAMIONES");
-			System.out.println("3-> TODOS");
-			numTipo = Console.readInt();
-		} while(numTipo<1||numTipo>3);
+			System.out.println("¿Qué desea hacer?");
+			System.out.println("1-> LISTAR VEHÍCULOS");
+			System.out.println("2-> EXPORTAR DATOS");
+			numAccion = Console.readInt();
+		} while(numAccion<1||numAccion>2);
 		
-		if(numTipo==1) {
-			cbd.verDatos("coche");
-			System.out.println();
+		if(numAccion==1) {
+		
+			do {
+				System.out.println("¿Qué desea listar?");
+				System.out.println("1-> COCHES");
+				System.out.println("2-> CAMIONES");
+				System.out.println("3-> TODOS");
+				numTipo = Console.readInt();
+			} while(numTipo<1||numTipo>3);
+		
+			if(numTipo==1) {
+				cbd.verDatos("coche");
+				System.out.println();
+			}
+		
+			if(numTipo==2) {
+				cbd.verDatos("camion");
+				System.out.println();
+			}
+		
+			if(numTipo==3) {
+				cbd.verDatos("vehiculo");
+				System.out.println();
+			}
+		
 		}
 		
-		if(numTipo==2) {
-			cbd.verDatos("camion");
-			System.out.println();
-		}
-		
-		if(numTipo==3) {
-			cbd.verDatos("vehiculo");
-			System.out.println();
+		if(numAccion==2) {
+			
+			//INSERTA AQUI EL CÓDIGO DE EXPORTAR XML
+			
 		}
 		
 		cbd.desconectarMYSQL();
