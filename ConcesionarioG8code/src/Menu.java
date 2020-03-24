@@ -249,9 +249,8 @@ public class Menu {
 		
 		if(numero==1) {
 			
-<<<<<<< HEAD
 			insertarXML();
-=======
+			
 			try {
 	            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
 	            String nombrexml = Console.readString();
@@ -334,7 +333,6 @@ public class Menu {
 			catch(Exception e) {
 				e.printStackTrace(); 
 	        }
->>>>>>> aa1eb185273897663adf9f4f07684f43e5e47808
 			
 		}		
 		
