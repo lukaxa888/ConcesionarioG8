@@ -18,10 +18,6 @@ public class Menu {
 		
 	}
 	
-	public void Correcionnumeros() throws NumberFormatException {
-		System.out.println("Introduce numeros, no eso");
-	}
-	
 	void menutexto() {
 		
 		System.out.println("\t GESTIÓN DE CONCESIONARIO G8");
@@ -249,10 +245,7 @@ public class Menu {
 	            System.out.println("Elemento raiz: " + document.getDocumentElement().getNodeName());
 	            
 	            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
-	            
-	            
-	            
-	            
+           
 	            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
 	                Node nodo = listavehiculo.item(i);
 	                System.out.println("Elemento: " + nodo.getNodeName());
@@ -262,7 +255,6 @@ public class Menu {
 	                String numasientos = element.getElementsByTagName("Numero_asientos").item(0).getTextContent();
 	                String precio = element.getElementsByTagName("Precio").item(0).getTextContent();
 	                String numserie = element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent();
-	                
 	                
 	                if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("camion")) {
 	                    

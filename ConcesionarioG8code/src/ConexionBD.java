@@ -28,7 +28,7 @@ import com.mysql.cj.MysqlConnection;
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=mysql&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
 
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
@@ -67,11 +67,11 @@ import com.mysql.cj.MysqlConnection;
 	                }
                	 
                	System.out.println();
+               	
 	                while(resultado.next()) {
 	                	   for (int x=1;x<=resultado.getMetaData().getColumnCount();x++)
-	                	     System.out.print(resultado.getString(x)+ "\t");
-	                	   
-	                	   System.out.println("");
+	                		   System.out.print(resultado.getString(x)+ "\t");                	   
+	                	   	   System.out.println("");
 	                } 
 	            
 	            } catch (SQLException ex) {
@@ -106,7 +106,7 @@ import com.mysql.cj.MysqlConnection;
 	    		 Camion Cam1=(Camion)V1;
 	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +Cam1.getnBastidor()+ "\",\"" +Cam1.getMatricula()+ "\",\"" +Cam1.getColor()+ "\","+Cam1.getnAsientos()+","+Cam1.getPrecio()+","+Cam1.getnSerie()+",\""+Cam1.getTipo()+"\")";
 	    		 //System.out.println(Query);
-	    		 Query2 = "INSERT IGNORE INTO camion VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+ ",\"" +Cam1.getnBastidor()+"\")";
+	    		 Query2 = "INSERT IGNORE INTO camion VALUES("+Cam1.getCarga()+",\""+Cam1.getTipoMercancia()+ "\",\"" +Cam1.getnBastidor()+"\")";
 	    		 //System.out.println(Query2);
 	    		 Query3 = "INSERT IGNORE INTO serie VALUES("+Cam1.getnSerie() + ",\"" + Cam1.getMarca()+ "\",\""+Cam1.getModelo()+"\","+Cam1.getAñoFabricacion()+")";
 	    		 //System.out.println(Query3);
