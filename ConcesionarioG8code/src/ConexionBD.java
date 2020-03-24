@@ -83,11 +83,11 @@ import com.mysql.cj.MysqlConnection;
 	                }
                	 
                	System.out.println();
+               	
 	                while(resultado.next()) {
 	                	   for (int x=1;x<=resultado.getMetaData().getColumnCount();x++)
-	                	     System.out.print(resultado.getString(x)+ "\t");
-	                	   
-	                	   System.out.println("");
+	                		   System.out.print(resultado.getString(x)+ "\t");                	   
+	                	   	   System.out.println("");
 	                } 
 	            
 	            } catch (SQLException ex) {
@@ -189,6 +189,42 @@ import com.mysql.cj.MysqlConnection;
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
+	     }
+	     
+	     public void vehiculosPintados(String color) {
+	    	 String Query = new String();
+	    	 
+	    	 Query = "call concesionario.Color_Coche('"+color+"');";
+	    	 //System.out.println(Query);
+	    	 
+	    	 	try {
+	    	 		 Statement st = conexion.createStatement();
+		             java.sql.ResultSet resultado;
+		             st.executeQuery("USE concesionario");
+		             resultado = st.executeQuery(Query);
+		                
+		             for (int x=1;x<=resultado.getMetaData().getColumnCount();x++) {
+		           	     System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
+		             }
+		             
+		             System.out.println();
+		             
+		             while(resultado.next()) {
+		                for (int x=1;x<=resultado.getMetaData().getColumnCount();x++) {
+		                	System.out.print(resultado.getString(x)+ "\t");		                	   
+		                	System.out.print("");
+		                }
+		                System.out.println();
+		             }
+				
+	    	 	} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	    	 	System.out.println();	
+	    	 	         
+                
+                
+	    	 	
 	     }
 	     
 	     

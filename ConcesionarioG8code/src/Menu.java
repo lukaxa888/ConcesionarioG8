@@ -16,16 +16,13 @@ public class Menu {
 	
 	Menu(){
 		
-		
 	}
-	
-	public void Correcionnumeros() throws NumberFormatException {
-		System.out.println("Introduce numeros, no eso");
-	}
+
 	
 	void menutexto() {
 		
 		System.out.println("\t GESTIÓN DE CONCESIONARIO G8");
+		
 		System.out.println("-----------------------------------------");
 		
 		System.out.println("¿Qué desea hacer?");
@@ -87,31 +84,57 @@ public class Menu {
 	 */
 	void stock() {
 		ConexionBD cbd = new ConexionBD();
-		
+		int numAccion = 0;
 		int numTipo = 0;
 		
 		do {
 			System.out.println("VEHÍCULOS EN STOCK");
 			System.out.println("-------------------------------");
-			System.out.println("Que desea listar?");
-			System.out.println("1-> COCHES");
-			System.out.println("2-> CAMIONES");
-			numTipo = Console.readInt();
-		} while(numTipo<1||numTipo>2);
+			System.out.println("¿Qué desea hacer?");
+			System.out.println("1-> LISTAR VEHÍCULOS");
+			System.out.println("2-> EXPORTAR DATOS");
+			numAccion = Console.readInt();
+		} while(numAccion<1||numAccion>2);
 		
-		if(numTipo==1) {
-			cbd.verDatos("coche");
-			System.out.println();
+		if(numAccion==1) {
+		
+			do {
+				System.out.println("¿Qué desea listar?");
+				System.out.println("1-> COCHES");
+				System.out.println("2-> CAMIONES");
+				System.out.println("3-> TODOS");
+				numTipo = Console.readInt();
+			} while(numTipo<1||numTipo>3);
+		
+			if(numTipo==1) {
+				cbd.verDatos("coche");
+				System.out.println();
+			}
+		
+			if(numTipo==2) {
+				cbd.verDatos("camion");
+				System.out.println();
+			}
+		
+			if(numTipo==3) {
+				cbd.verDatos("vehiculo");
+				System.out.println();
+			}
+		
 		}
 		
-		if(numTipo==2) {
-			cbd.verDatos("camion");
-			System.out.println();
+		if(numAccion==2) {
+			
+			//INSERTA AQUI EL CÓDIGO DE EXPORTAR XML
+			
 		}
 		
 		cbd.desconectarMYSQL();
 	}	
 	
+	/**
+	 * Vende y manda a la tabla "historial" el vehiculo con numero de bastidor introducido.
+	 */
 	void vender() {
 		ConexionBD cbd = new ConexionBD();
 		
@@ -122,7 +145,7 @@ public class Menu {
 		do {
 			System.out.println("SISTEMA DE VENTA");
 			System.out.println("-------------------------------");
-			System.out.println("Que desea vender?");
+			System.out.println("¿Qué desea vender?");
 			System.out.println("1-> COCHE");
 			System.out.println("2-> CAMION");
 			numTipo = Console.readInt();				
@@ -143,44 +166,68 @@ public class Menu {
 		cbd.desconectarMYSQL();
 	}	
 	
+	/**
+	 * Dependiendo de la opcion elegida: listar vehiculos pintados del color introducido o pintar un vehiculo (camnbiar color)
+	 */
 	void pintar() {
 		ConexionBD cbd = new ConexionBD();
 		
 		int numTipo = 0;
+		int numAccion=0;
 		Coche c1=new Coche();
 		Camion ca1=new Camion();	
 
 		do {		
 			System.out.println("SISTEMA DE PINTADO");
 			System.out.println("-------------------------------------------");
-			System.out.println("Que desea pintar?");
-			System.out.println("1-> COCHE");
-			System.out.println("2-> CAMION");			
-			numTipo = Console.readInt();			
-		} while(numTipo<1||numTipo>2);
+			System.out.println("Acciones:");
+			System.out.println("1-> LISTAR VEHICULOS PINTADOS");
+			System.out.println("2-> PINTAR VEHICULO");
+			numAccion = Console.readInt();
+		} while(numAccion<1||numAccion>2);
 		
-		System.out.println("Introduce un bastidor para pintar:");
-		String numBastidor=Console.readString();
-		
-		System.out.println("Introduce un color nuevo para el vehículo:");
-		String nuevoColor=Console.readString();
-		
-		if(numTipo==1) {
-			c1.setnBastidor(numBastidor);
-			c1.setColor(nuevoColor);
-			cbd.pintarVehiculo(c1.getnBastidor(),c1.getColor());
+		if (numAccion==1) {
+			System.out.println("Elige un color:");
+			String color = Console.readString();
+			cbd.vehiculosPintados(color);
 		}
 		
-		if(numTipo==2) {
-			ca1.setnBastidor(numBastidor);
-			ca1.setColor(nuevoColor);
-			cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
+		if (numAccion==2) {
+			
+			do {
+				System.out.println("¿Qué desea pintar?");
+				System.out.println("1-> COCHE");
+				System.out.println("2-> CAMION");			
+				numTipo = Console.readInt();
+			} while(numTipo<1||numTipo>2);
+		
+			System.out.println("Introduce un bastidor para pintar:");
+			String numBastidor=Console.readString();
+		
+			System.out.println("Introduce un color nuevo para el vehículo:");
+			String nuevoColor=Console.readString();
+		
+			if(numTipo==1) {
+				c1.setnBastidor(numBastidor);
+				c1.setColor(nuevoColor);
+				cbd.pintarVehiculo(c1.getnBastidor(),c1.getColor());
+			}
+		
+			if(numTipo==2) {
+				ca1.setnBastidor(numBastidor);
+				ca1.setColor(nuevoColor);
+				cbd.pintarVehiculo(ca1.getnBastidor(),ca1.getColor());
+			}
+		
 		}
 		
 		
 		cbd.desconectarMYSQL();
 	}
 	
+	/**
+	 * Introduce un vehiculo con los datos introducidos a la base de datos del concesionario
+	 */
 	void comprar() {
 		ConexionBD cbd = new ConexionBD();
 	
@@ -192,7 +239,7 @@ public class Menu {
 
 		System.out.println("SISTEMA DE COMPRA");
 		System.out.println("-------------------------------");
-		System.out.println("Cómo desea introducir el vehículo?");
+		System.out.println("¿Cómo desea introducir el vehículo?");
 		
 		do{
 			System.out.println("1-> ARCHIVO XML");
@@ -202,16 +249,101 @@ public class Menu {
 		
 		if(numero==1) {
 			
+<<<<<<< HEAD
 			insertarXML();
+=======
+			try {
+	            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
+	            String nombrexml = Console.readString();
+	            File archivo = new File(nombrexml+".xml");
+	            
+	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+	            Document document = documentBuilder.parse(archivo);
+	            
+	            document.getDocumentElement().normalize();
+	            
+	            System.out.println("Elemento raiz: " + document.getDocumentElement().getNodeName());
+	            
+	            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
+           
+	            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
+	                Node nodo = listavehiculo.item(i);
+	                System.out.println("Elemento: " + nodo.getNodeName());
+	                
+	                Element element = (Element) nodo;
+	                
+	                String numasientos = element.getElementsByTagName("Numero_asientos").item(0).getTextContent();
+	                String precio = element.getElementsByTagName("Precio").item(0).getTextContent();
+	                String numserie = element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent();
+	                
+	                if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("camion")) {
+	                    
+	                	ca1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                	ca1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                	ca1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+	                	ca1.setnAsientos(Integer.parseInt(numasientos));
+	                	ca1.setPrecio(Integer.parseInt(precio));
+	                	ca1.setnSerie(Integer.parseInt(numserie));
+	                	ca1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                	
+	                	
+	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
+	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
+	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                    
+	                    System.out.println("");
+	                    
+	                    cbd.insertarVehiculo(ca1);
+	                    
+	                } 
+	                
+	                	if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("coche")) {
+	                    
+	                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                	c1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+	                	c1.setnAsientos(Integer.parseInt(numasientos));
+	                	c1.setPrecio(Integer.parseInt(precio));
+	                	c1.setnSerie(Integer.parseInt(numserie));
+	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                	
+	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
+	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
+	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
+	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
+	                    
+	                    System.out.println("");
+	                    
+	                    cbd.insertarVehiculo(c1);
+
+	                }
+
+	                    
+	                } 
+	                   
+	            }
+					
+			catch(Exception e) {
+				e.printStackTrace(); 
+	        }
+>>>>>>> aa1eb185273897663adf9f4f07684f43e5e47808
 			
-		}
-		
+		}		
 		
 		if(numero==2) {
 			
 			do{
-				System.out.println("1 Para coche");
-				System.out.println("2 Para camión");
+				System.out.println("Que desea comprar?");
+				System.out.println("1-> COCHE");
+				System.out.println("2-> CAMION");
 				System.out.println();
 				
 					cocheOCamion=Console.readInt();
