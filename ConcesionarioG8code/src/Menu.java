@@ -11,7 +11,6 @@ import org.w3c.dom.NodeList;
 
 public class Menu {
 
-	CrearLeerXML xm1 = null;
 	ConexionBD cbd = new ConexionBD();
 	
 	Menu(){
@@ -124,8 +123,11 @@ public class Menu {
 		}
 		
 		if(numAccion==2) {
-			
-			//INSERTA AQUI EL CÓDIGO DE EXPORTAR XML
+						
+			 cbd.verDatosXML("vehiculo");
+			 
+			 System.out.println("Se han exportado los datos al archivo concesionario.xml");
+			 System.out.println();
 			
 		}
 		
@@ -245,97 +247,15 @@ public class Menu {
 			System.out.println("1-> ARCHIVO XML");
 			System.out.println("2-> INTRODUCIR DATOS A MANO");
 			numero=Console.readInt();
+			
 		} while(numero<1||numero>2);
 		
 		if(numero==1) {
 			
 			insertarXML();
 			
-			try {
-	            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
-	            String nombrexml = Console.readString();
-	            File archivo = new File(nombrexml+".xml");
-	            
-	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-	            Document document = documentBuilder.parse(archivo);
-	            
-	            document.getDocumentElement().normalize();
-	            
-	            System.out.println("Elemento raiz: " + document.getDocumentElement().getNodeName());
-	            
-	            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
-           
-	            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
-	                Node nodo = listavehiculo.item(i);
-	                System.out.println("Elemento: " + nodo.getNodeName());
-	                
-	                Element element = (Element) nodo;
-	                
-	                String numasientos = element.getElementsByTagName("Numero_asientos").item(0).getTextContent();
-	                String precio = element.getElementsByTagName("Precio").item(0).getTextContent();
-	                String numserie = element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent();
-	                
-	                if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("camion")) {
-	                    
-	                	ca1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                	ca1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                	ca1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
-	                	ca1.setnAsientos(Integer.parseInt(numasientos));
-	                	ca1.setPrecio(Integer.parseInt(precio));
-	                	ca1.setnSerie(Integer.parseInt(numserie));
-	                	ca1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                	
-	                	
-	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
-	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
-	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
-	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
-	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                    
-	                    System.out.println("");
-	                    
-	                    cbd.insertarVehiculo(ca1);
-	                    
-	                } 
-	                
-	                	if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("coche")) {
-	                    
-	                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                	c1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
-	                	c1.setnAsientos(Integer.parseInt(numasientos));
-	                	c1.setPrecio(Integer.parseInt(precio));
-	                	c1.setnSerie(Integer.parseInt(numserie));
-	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                	
-	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
-	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
-	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
-	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
-	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                    
-	                    System.out.println("");
-	                    
-	                    cbd.insertarVehiculo(c1);
-
-	                }
-
-	                    
-	                } 
-	                   
-	            }
-					
-			catch(Exception e) {
-				e.printStackTrace(); 
-	        }
-			
-		}		
-		
+	    }
+				
 		if(numero==2) {
 			
 			do{
@@ -532,11 +452,12 @@ public class Menu {
                    
             }
             
-			
-				
 		catch(Exception e) {
 			e.printStackTrace(); 
         }
+		
+		cbd.desconectarMYSQL();
+		
 	}
 	
 }
