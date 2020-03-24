@@ -240,13 +240,9 @@ import com.mysql.cj.MysqlConnection;
 	                java.sql.ResultSet resultado;
 	                st.executeQuery("USE concesionario");
 	                resultado = st.executeQuery(Query);         
-	                         	 
-            	
-	                
-	                	   	        		     	                		   
-	                		   try {
-	                			   
-	                			  
+	                    	        		     	                		   
+	               	   		try {
+	               		   
 	                		        // Creo una instancia de DocumentBuilderFactory
 	                		        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	                		        // Creo un documentBuilder
@@ -317,11 +313,11 @@ import com.mysql.cj.MysqlConnection;
 	                		        
 		        	                	   }
 		                			   
-
 	                		        // Asocio el source con el Document
 	                		        Source source = new DOMSource(documento);
 	                		        // Creo el Result, indicado que fichero se va a crear
-	                		        Result result = new StreamResult(new File("concesionario.xml"));
+	                		        
+	                		        Result result = new StreamResult(new File("Concesionario.xml"));
 
 	                		        // Creo un transformer, se crea el fichero XML
 	                		        Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -341,27 +337,5 @@ import com.mysql.cj.MysqlConnection;
 	            	ex.printStackTrace();
 	            }
 	        }
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-		        
-	 public static void main(String[] args) {
-		 ConexionBD db = new ConexionBD();
-        
-        db.verDatos("coche");
-    
-     }
 	
 }
