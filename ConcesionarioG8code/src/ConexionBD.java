@@ -1,3 +1,4 @@
+import java.io.File;
 import java.sql.Connection;	
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,21 @@ import java.sql.Statement;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 import com.mysql.cj.MysqlConnection;
 	 
@@ -28,7 +44,7 @@ import com.mysql.cj.MysqlConnection;
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=mysql&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
 
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
@@ -90,6 +106,7 @@ import com.mysql.cj.MysqlConnection;
 	    	 
 	    	 if(V1.getTipo().equals("coche")) {
 	    		 Coche C1=(Coche)V1;
+	    		 
 	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
 	    		 //System.out.println(Query);
 	    		 Query2 = "INSERT IGNORE INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
@@ -106,7 +123,7 @@ import com.mysql.cj.MysqlConnection;
 	    		 Camion Cam1=(Camion)V1;
 	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +Cam1.getnBastidor()+ "\",\"" +Cam1.getMatricula()+ "\",\"" +Cam1.getColor()+ "\","+Cam1.getnAsientos()+","+Cam1.getPrecio()+","+Cam1.getnSerie()+",\""+Cam1.getTipo()+"\")";
 	    		 //System.out.println(Query);
-	    		 Query2 = "INSERT IGNORE INTO camion VALUES("+Cam1.getCarga()+","+Cam1.getTipoMercancia()+ ",\"" +Cam1.getnBastidor()+"\")";
+	    		 Query2 = "INSERT IGNORE INTO camion VALUES("+Cam1.getCarga()+",\""+Cam1.getTipoMercancia()+ "\",\"" +Cam1.getnBastidor()+"\")";
 	    		 //System.out.println(Query2);
 	    		 Query3 = "INSERT IGNORE INTO serie VALUES("+Cam1.getnSerie() + ",\"" + Cam1.getMarca()+ "\",\""+Cam1.getModelo()+"\","+Cam1.getAñoFabricacion()+")";
 	    		 //System.out.println(Query3);
@@ -173,6 +190,134 @@ import com.mysql.cj.MysqlConnection;
 						e.printStackTrace();
 					}
 	     }
+	     
+	     
+	     
+	     
+	     
+	     
+	     public void verDatosXML(String nombreTabla) {
+	            try {	            
+	            	
+	            	String Query = "SELECT * FROM " + nombreTabla;
+	                Statement st = conexion.createStatement();
+	                java.sql.ResultSet resultado;
+	                st.executeQuery("USE concesionario");
+	                resultado = st.executeQuery(Query);         
+	                         	 
+            	
+	                
+	                	   	        		     	                		   
+	                		   try {
+	                			   
+	                			  
+	                		        // Creo una instancia de DocumentBuilderFactory
+	                		        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	                		        // Creo un documentBuilder
+	                		        DocumentBuilder builder = factory.newDocumentBuilder();
+	                		        // Creo un DOMImplementation
+	                		        DOMImplementation implementation = builder.getDOMImplementation();
+
+	                		        // Creo un documento con un elemento raiz
+	                		        Document documento = implementation.createDocument(null, "concesionario", null);
+	                		        documento.setXmlVersion("1.0");
+
+	                		        
+	                		        while(resultado.next()) {
+		        	                	   
+	                		        
+	                		        
+	                		        // Creo los elementos
+	                		        Element vehiculo = documento.createElement("vehiculo");
+	                		        
+	                		        
+	                		        
+	                		        // Numero_bastidor
+	                		        Element Numero_bastidor = documento.createElement("Numero_bastidor");
+	                		        Text textNumero_bastidor = documento.createTextNode(resultado.getString("Numero_bastidor"));
+	                		        Numero_bastidor.appendChild(textNumero_bastidor);
+	                		        vehiculo.appendChild(Numero_bastidor);
+
+	                		        // Matricula
+	                		        Element matricula = documento.createElement("Matricula");
+	                		        Text textMatricula = documento.createTextNode(resultado.getString("Matricula"));
+	                		        matricula.appendChild(textMatricula);
+	                		        vehiculo.appendChild(matricula);
+
+	                		        // Color
+	                		        Element color = documento.createElement("Color");
+	                		        Text textColor = documento.createTextNode(resultado.getString("Color"));
+	                		        color.appendChild(textColor);
+	                		        vehiculo.appendChild(color);
+	                		        
+	                		        // Numero_asientos
+	                		        Element numero_asientos = documento.createElement("Numero_asientos");
+	                		        Text textNumero_asientos = documento.createTextNode(resultado.getString("Numero_asientos"));
+	                		        numero_asientos.appendChild(textNumero_asientos);
+	                		        vehiculo.appendChild(numero_asientos);
+
+	                		        // Precio
+	                		        Element precio = documento.createElement("Precio");
+	                		        Text textPrecio = documento.createTextNode(resultado.getString("Precio"));
+	                		        precio.appendChild(textPrecio);
+	                		        vehiculo.appendChild(precio);
+	                		        
+	                		        // Numero_serie
+	                		        Element serie_numero_serie = documento.createElement("Serie_numero_serie");
+	                		        Text textSerie_numero_serie = documento.createTextNode(resultado.getString("Serie_numero_serie"));
+	                		        serie_numero_serie.appendChild(textSerie_numero_serie);
+	                		        vehiculo.appendChild(serie_numero_serie);
+	                		        
+	                		        // Tipo
+	                		        Element tipo = documento.createElement("Tipo");
+	                		        Text textTipo = documento.createTextNode(resultado.getString("Tipo"));
+	                		        tipo.appendChild(textTipo);
+	                		        vehiculo.appendChild(tipo);
+
+	                		        
+
+	                		        // Añado al root el elemento vehiculo
+	                		        documento.getDocumentElement().appendChild(vehiculo);
+	                		        
+		        	                	   }
+		                			   
+
+	                		        // Asocio el source con el Document
+	                		        Source source = new DOMSource(documento);
+	                		        // Creo el Result, indicado que fichero se va a crear
+	                		        Result result = new StreamResult(new File("concesionario.xml"));
+
+	                		        // Creo un transformer, se crea el fichero XML
+	                		        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+	                		        transformer.transform(source, result);
+	        	                	 
+	                		    } catch (ParserConfigurationException | TransformerException ex) {
+	                		        System.out.println(ex.getMessage());
+	                		    }
+	                		   
+	                		   
+	                		   
+	                	   
+	                	   System.out.println("");
+	                 
+	            
+	            } catch (SQLException ex) {
+	            	ex.printStackTrace();
+	            }
+	        }
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
 	     
 	     
 		        

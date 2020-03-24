@@ -202,99 +202,7 @@ public class Menu {
 		
 		if(numero==1) {
 			
-			try {
-	            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
-	            String nombrexml = Console.readString();
-	            File archivo = new File(nombrexml+".xml");
-	            
-	            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-	            Document document = documentBuilder.parse(archivo);
-	            
-	            document.getDocumentElement().normalize();
-	            
-	            System.out.println("Elemento raiz: " + document.getDocumentElement().getNodeName());
-	            
-	            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
-	            
-	            
-	            
-	            
-	            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
-	                Node nodo = listavehiculo.item(i);
-	                System.out.println("Elemento: " + nodo.getNodeName());
-	                
-	                Element element = (Element) nodo;
-	                
-	                String numasientos = element.getElementsByTagName("Numero_asientos").item(0).getTextContent();
-	                String precio = element.getElementsByTagName("Precio").item(0).getTextContent();
-	                String numserie = element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent();
-	                
-	                
-	                if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("camion")) {
-	                    
-	                	ca1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                	ca1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                	ca1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
-	                	ca1.setnAsientos(Integer.parseInt(numasientos));
-	                	ca1.setPrecio(Integer.parseInt(precio));
-	                	ca1.setnSerie(Integer.parseInt(numserie));
-	                	ca1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                	
-	                	
-	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
-	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
-	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
-	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
-	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                    
-	                    System.out.println("");
-	                    
-	                    cbd.insertarVehiculo(ca1);
-	                    
-	                } 
-	                
-	                	if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("coche")) {
-	                    
-	                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                	c1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
-	                	c1.setnAsientos(Integer.parseInt(numasientos));
-	                	c1.setPrecio(Integer.parseInt(precio));
-	                	c1.setnSerie(Integer.parseInt(numserie));
-	                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                	
-<<<<<<< HEAD
-=======
-	                	
->>>>>>> fc180d3333b0487116daa4ea23b83504780d8b49
-	                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
-	                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
-	                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
-	                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
-	                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
-	                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
-	                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
-	                    
-	                    System.out.println("");
-	                    
-	                    cbd.insertarVehiculo(c1);
-<<<<<<< HEAD
-	                }
-=======
-	                    
-	                } 
->>>>>>> fc180d3333b0487116daa4ea23b83504780d8b49
-	                   
-	            }
-	            
-				}
-					
-			catch(Exception e) {
-				e.printStackTrace(); 
-	        }
+			insertarXML();
 			
 		}
 		
@@ -396,7 +304,110 @@ public class Menu {
 		cbd.desconectarMYSQL();
 	}
 	
-	
+	void insertarXML()
+	{
+		try {
+            System.out.println("Introduce nombre de XML (SIN EXTENSIÓN):");
+            String nombrexml = Console.readString();
+            File archivo = new File(nombrexml+".xml");
+            
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+            Document document = documentBuilder.parse(archivo);
+            
+            document.getDocumentElement().normalize();
+            
+            System.out.println("Elemento raiz: " + document.getDocumentElement().getNodeName());
+            
+            NodeList listavehiculo = document.getElementsByTagName("vehiculo");
+            
+            
+            Coche c1=new Coche();
+    		Camion ca1=new Camion();
+            
+            for(int i = 0 ; i < listavehiculo.getLength() ; i++) {
+                Node nodo = listavehiculo.item(i);
+                System.out.println("Elemento: " + nodo.getNodeName());
+                
+                Element element = (Element) nodo;
+                
+                String numasientos = element.getElementsByTagName("Numero_asientos").item(0).getTextContent();
+                String precio = element.getElementsByTagName("Precio").item(0).getTextContent();
+                String numserie = element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent();
+                String carga = element.getElementsByTagName("Carga").item(0).getTextContent();
+                String numpuertas = element.getElementsByTagName("Numero_puertas").item(0).getTextContent();
+                String capmaletero = element.getElementsByTagName("Capacidad_maletero").item(0).getTextContent();
+                
+                
+                if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("camion")) {
+                    
+                	ca1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                	ca1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
+                	ca1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+                	ca1.setnAsientos(Integer.parseInt(numasientos));
+                	ca1.setPrecio(Integer.parseInt(precio));
+                	ca1.setnSerie(Integer.parseInt(numserie));
+                	ca1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+                	ca1.setCarga(Integer.parseInt(carga));
+                	ca1.setTipoMercancia(element.getElementsByTagName("Tipo_mercancia").item(0).getTextContent());
+                	
+                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
+                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
+                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
+                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
+                    System.out.println("Carga: " + element.getElementsByTagName("Carga").item(0).getTextContent());
+                    System.out.println("Tipo_mercancia: " + element.getElementsByTagName("Tipo_mercancia").item(0).getTextContent());
+                    
+                    System.out.println("");
+                    
+                    cbd.insertarVehiculo(ca1);
+                    
+                } 
+                
+                	if(element.getElementsByTagName("Tipo").item(0).getTextContent().equals("coche")) {
+                    
+                	c1.setnBastidor(element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                	c1.setMatricula(element.getElementsByTagName("Matricula").item(0).getTextContent());
+                	c1.setColor(element.getElementsByTagName("Color").item(0).getTextContent());
+                	c1.setnAsientos(Integer.parseInt(numasientos));
+                	c1.setPrecio(Integer.parseInt(precio));
+                	c1.setnSerie(Integer.parseInt(numserie));
+                	c1.setTipo(element.getElementsByTagName("Tipo").item(0).getTextContent());
+                	c1.setnPuertas(Integer.parseInt(numpuertas));
+                	c1.setCapacidadMaletero(Integer.parseInt(capmaletero));
+                	
+
+                    System.out.println("Numero_bastidor: " + element.getElementsByTagName("Numero_bastidor").item(0).getTextContent());
+                    System.out.println("Matricula: " + element.getElementsByTagName("Matricula").item(0).getTextContent());
+                    System.out.println("Color: " + element.getElementsByTagName("Color").item(0).getTextContent());
+                    System.out.println("Numero_asientos: " + element.getElementsByTagName("Numero_asientos").item(0).getTextContent());
+                    System.out.println("Precio: " + element.getElementsByTagName("Precio").item(0).getTextContent());
+                    System.out.println("Serie_Numero_serie: " + element.getElementsByTagName("Serie_Numero_serie").item(0).getTextContent());
+                    System.out.println("Tipo: " + element.getElementsByTagName("Tipo").item(0).getTextContent());
+                    System.out.println("Numero_puertas: " + element.getElementsByTagName("Numero_puertas").item(0).getTextContent());
+                    System.out.println("Capacidad_maletero: " + element.getElementsByTagName("Capacidad_maletero").item(0).getTextContent());
+                    
+                    System.out.println("");
+                    
+                    cbd.insertarVehiculo(c1);
+
+                }
+
+                    
+                } 
+
+                   
+            }
+            
+			
+				
+		catch(Exception e) {
+			e.printStackTrace(); 
+        }
+	}
 	
 }
 

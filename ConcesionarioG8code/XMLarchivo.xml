@@ -8,6 +8,10 @@
     <Precio>15548</Precio>
     <Serie_Numero_serie>2</Serie_Numero_serie>
     <Tipo>camion</Tipo>
+    <Carga>142</Carga>
+    <Tipo_mercancia>inflamable</Tipo_mercancia>
+    <Numero_puertas></Numero_puertas>
+    <Capacidad_maletero></Capacidad_maletero>
 </vehiculo>
 <vehiculo>
     <Numero_bastidor>LLO12345456</Numero_bastidor>
@@ -17,6 +21,10 @@
     <Precio>11548</Precio>
     <Serie_Numero_serie>1</Serie_Numero_serie>
     <Tipo>camion</Tipo>
+    <Carga>122</Carga>
+    <Tipo_mercancia>peligrosa</Tipo_mercancia>
+    <Numero_puertas></Numero_puertas>
+    <Capacidad_maletero></Capacidad_maletero>
 </vehiculo>
 <vehiculo>
     <Numero_bastidor>ODO12345456</Numero_bastidor>
@@ -26,5 +34,9 @@
     <Precio>10548</Precio>
     <Serie_Numero_serie>3</Serie_Numero_serie>
     <Tipo>coche</Tipo>
+    <Carga></Carga>
+    <Tipo_mercancia></Tipo_mercancia>
+    <Numero_puertas>3</Numero_puertas>
+    <Capacidad_maletero>65</Capacidad_maletero>
 </vehiculo>
 </concesionario>
