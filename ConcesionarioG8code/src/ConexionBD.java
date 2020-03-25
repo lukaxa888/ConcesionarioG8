@@ -69,23 +69,30 @@ import com.mysql.cj.MysqlConnection;
 	   
 	    
 	    /**
-	     * Printea TODOS los datos de una tabla.
+	     * Printea TODOS los vehículos.
 	     */
-	     public void verDatos(String nombreTabla) {
-	            try {	            
-	            	
-	            	String Query = "SELECT * FROM " + nombreTabla;
-	                Statement st = conexion.createStatement();
-	                java.sql.ResultSet resultado;
+	     public void verDatosTotal() {
+	    	 verDatosCoches();
+	    	 System.out.println();
+	    	 verDatosCamiones();
+	     }
+	     
+	     /**
+	      * Printea todos los coches
+	      */
+	     public void verDatosCoches() {
+	    	 try {	            	            	
+	            	String Query = "SELECT vehiculo.Numero_bastidor, vehiculo.Matricula, Vehiculo.Color, Vehiculo.Numero_asientos, Vehiculo.Precio, Vehiculo.Serie_Numero_serie, Coche.Numero_puertas, Coche.Capacidad_maletero FROM vehiculo inner join coche on vehiculo.Numero_bastidor = coche.Vehiculo_Numero_bastidor;";
+	                Statement st = conexion.createStatement();	                
 	                st.executeQuery("USE concesionario");
-	                resultado = st.executeQuery(Query);         
+	                java.sql.ResultSet resultado = st.executeQuery(Query);              
 	                
 	                for (int x=1;x<=resultado.getMetaData().getColumnCount();x++) {
-               	     	System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
+            	     	System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
 	                }
-               	 
-               	System.out.println();
-               	
+            	 
+            	System.out.println();
+            	
 	                while(resultado.next()) {
 	                	   for (int x=1;x<=resultado.getMetaData().getColumnCount();x++)
 	                		   System.out.print(resultado.getString(x)+ "\t");                	   
@@ -95,7 +102,34 @@ import com.mysql.cj.MysqlConnection;
 	            } catch (SQLException ex) {
 	            	ex.printStackTrace();
 	            }
-	        }
+	     }
+	     
+	     /**
+	      * Printea todos los camiones
+	      */
+	     public void verDatosCamiones() {
+	    	 try {	            	            	
+	            	String Query = "SELECT vehiculo.Numero_bastidor, vehiculo.Matricula, Vehiculo.Color, Vehiculo.Numero_asientos, Vehiculo.Precio, Vehiculo.Serie_Numero_serie, Camion.Tipo_mercancia, Camion.Carga FROM vehiculo inner join camion on vehiculo.Numero_bastidor = camion.Vehiculo_Numero_bastidor;";
+	                Statement st = conexion.createStatement();
+	                st.executeQuery("USE concesionario");
+	                java.sql.ResultSet resultado = st.executeQuery(Query);                
+ 
+	                for (int x=1;x<=resultado.getMetaData().getColumnCount();x++) {
+            	     	System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
+	                }
+            	 
+            	System.out.println();
+            	
+	                while(resultado.next()) {
+	                	   for (int x=1;x<=resultado.getMetaData().getColumnCount();x++)
+	                		   System.out.print(resultado.getString(x)+ "\t");                	   
+	                	   	   System.out.println("");
+	                } 
+	            
+	            } catch (SQLException ex) {
+	            	ex.printStackTrace();
+	            }
+	     }
 	     
 	     
 	     /**
@@ -107,8 +141,7 @@ import com.mysql.cj.MysqlConnection;
 	    	 String Query3 = new String();
 	    	 
 	    	 if(V1.getTipo().equals("coche")) {
-	    		 Coche C1=(Coche)V1;
-	    		 
+	    		 Coche C1=(Coche)V1;	    		 
 	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
 	    		 //System.out.println(Query);
 	    		 Query2 = "INSERT IGNORE INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
@@ -135,8 +168,8 @@ import com.mysql.cj.MysqlConnection;
 	                try {
 						Statement st = conexion.createStatement();
 						st.executeQuery("USE concesionario");
-						st.executeUpdate(Query);
 						st.executeUpdate(Query3);
+						st.executeUpdate(Query);
 						st.executeUpdate(Query2);
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -168,6 +201,7 @@ import com.mysql.cj.MysqlConnection;
 						st.executeQuery("USE concesionario");
 						st.executeUpdate(Query);
 						st.executeUpdate(Query1);
+						st.executeUpdate(Query2);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}

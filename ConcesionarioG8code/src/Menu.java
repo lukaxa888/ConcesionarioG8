@@ -77,6 +77,7 @@ public class Menu {
 			}
 			
 			if(numero == 5) {
+				cbd.desconectarMYSQL();
 				salir=true;
 			}
 			
@@ -111,17 +112,17 @@ public class Menu {
 			} while(numTipo<1||numTipo>3);
 		
 			if(numTipo==1) {
-				cbd.verDatos("coche");
+				cbd.verDatosCoches();
 				System.out.println();
 			}
 		
 			if(numTipo==2) {
-				cbd.verDatos("camion");
+				cbd.verDatosCamiones();
 				System.out.println();
 			}
 		
 			if(numTipo==3) {
-				cbd.verDatos("vehiculo");
+				cbd.verDatosTotal();
 				System.out.println();
 			}
 		
@@ -136,7 +137,6 @@ public class Menu {
 			
 		}
 		
-		cbd.desconectarMYSQL();
 	}	
 	
 	/**
@@ -170,7 +170,7 @@ public class Menu {
 			ca1.setnBastidor(numBastidor);
 			cbd.venderVehiculo(ca1.getnBastidor());
 		}
-		cbd.desconectarMYSQL();
+		
 	}	
 	
 	/**
@@ -228,7 +228,6 @@ public class Menu {
 		
 		}
 	
-		cbd.desconectarMYSQL();
 	}
 	
 	/**
@@ -268,7 +267,7 @@ public class Menu {
 				System.out.println("2-> CAMION");
 				System.out.println();
 				
-					cocheOCamion=Console.readInt();
+				cocheOCamion=Console.readInt();
 				
 			} while(cocheOCamion<1||cocheOCamion>2);
 			
@@ -355,7 +354,7 @@ public class Menu {
 			}
 			
 		}
-		cbd.desconectarMYSQL();
+	
 	}
 	
 	
@@ -462,10 +461,7 @@ public class Menu {
 			e.printStackTrace(); 
         }
 		
-		cbd.desconectarMYSQL();
-		
-	}
-	
+	}	
 }
 
 
