@@ -17,7 +17,9 @@ public class Menu {
 		
 	}
 
-	
+	/**
+	 * Método que printea el menú al usuario
+	 */
 	void menutexto() {
 		
 		System.out.println("\t GESTIÓN DE CONCESIONARIO G8");
@@ -38,6 +40,9 @@ public class Menu {
 		
 	}
 	
+	/**
+	 * Método que regula las opciones posibles en el menú y el acceso a las mismas
+	 */
 	void menu() {
 		boolean salir=false;
 		int numero = 0;
@@ -169,7 +174,7 @@ public class Menu {
 	}	
 	
 	/**
-	 * Dependiendo de la opcion elegida: listar vehiculos pintados del color introducido o pintar un vehiculo (camnbiar color)
+	 * Dependiendo de la opcion elegida: listar vehiculos pintados del color introducido o pintar un vehiculo (cambiar color)
 	 */
 	void pintar() {
 		ConexionBD cbd = new ConexionBD();
@@ -222,8 +227,7 @@ public class Menu {
 			}
 		
 		}
-		
-		
+	
 		cbd.desconectarMYSQL();
 	}
 	
@@ -354,6 +358,10 @@ public class Menu {
 		cbd.desconectarMYSQL();
 	}
 	
+	
+	/**
+	 * Inserta los datos del xml pasado por consola en la base de datos del concesionario
+	 */
 	void insertarXML()
 	{
 		try {
@@ -445,11 +453,9 @@ public class Menu {
                     cbd.insertarVehiculo(c1);
 
                 }
-
                     
                 } 
-
-                   
+                  
             }
             
 		catch(Exception e) {

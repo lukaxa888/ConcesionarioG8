@@ -35,7 +35,8 @@ import com.mysql.cj.MysqlConnection;
 	    Statement comando = null;
 	    ResultSet registro;
 	    String nombreTabla;
-	    	    
+	    
+	    
 	    /**
 		  * Conecta el objeto a la base de datos configurada en el método al crear un objeto ConexionBD.
 		  */ 
@@ -44,7 +45,7 @@ import com.mysql.cj.MysqlConnection;
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=mysql&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
 
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
@@ -65,6 +66,7 @@ import com.mysql.cj.MysqlConnection;
 				e.printStackTrace();
 			}
 	    }
+	   
 	    
 	    /**
 	     * Printea TODOS los datos de una tabla.
@@ -140,7 +142,8 @@ import com.mysql.cj.MysqlConnection;
 						e.printStackTrace();
 					}
 	    	 }
-	    	
+	    
+	     
 	     /**
 	      * Elimina el registro del vehículo que se le pasa por parámetros.
 	      */
@@ -169,6 +172,7 @@ import com.mysql.cj.MysqlConnection;
 						e.printStackTrace();
 					}
 	     }	     
+	
 	     
 	     /**
 	      * Pide por parametros un numero de bastidor y un color y le asigna ese color al vehículo al que le corresponde el número
@@ -190,7 +194,11 @@ import com.mysql.cj.MysqlConnection;
 						e.printStackTrace();
 					}
 	     }
+
 	     
+	     /**
+	      * Llama al procedimiento de la base de datos que lista todos los vehículos pintados del color que se le pasa
+	      */
 	     public void vehiculosPintados(String color) {
 	    	 String Query = new String();
 	    	 
@@ -221,17 +229,13 @@ import com.mysql.cj.MysqlConnection;
 					e.printStackTrace();
 				}
 	    	 	System.out.println();	
-	    	 	         
-                
-                
-	    	 	
+ 	 	
 	     }
+  
 	     
-	     
-	     
-	     
-	     
-	     
+	     /**
+	      * Exporta los datos de la base de datos a un archivo xml
+	      */
 	     public void verDatosXML(String nombreTabla) {
 	            try {	            
 	            	
@@ -253,16 +257,11 @@ import com.mysql.cj.MysqlConnection;
 	                		        // Creo un documento con un elemento raiz
 	                		        Document documento = implementation.createDocument(null, "concesionario", null);
 	                		        documento.setXmlVersion("1.0");
-
 	                		        
 	                		        while(resultado.next()) {
-		        	                	   
-	                		        
-	                		        
+                		        
 	                		        // Creo los elementos
 	                		        Element vehiculo = documento.createElement("vehiculo");
-	                		        
-	                		        
 	                		        
 	                		        // Numero_bastidor
 	                		        Element Numero_bastidor = documento.createElement("Numero_bastidor");
@@ -304,14 +303,12 @@ import com.mysql.cj.MysqlConnection;
 	                		        Element tipo = documento.createElement("Tipo");
 	                		        Text textTipo = documento.createTextNode(resultado.getString("Tipo"));
 	                		        tipo.appendChild(textTipo);
-	                		        vehiculo.appendChild(tipo);
-
+	                		        vehiculo.appendChild(tipo);           		        
 	                		        
-
 	                		        // Añado al root el elemento vehiculo
 	                		        documento.getDocumentElement().appendChild(vehiculo);
 	                		        
-		        	                	   }
+	                		        }
 		                			   
 	                		        // Asocio el source con el Document
 	                		        Source source = new DOMSource(documento);
@@ -326,12 +323,8 @@ import com.mysql.cj.MysqlConnection;
 	                		    } catch (ParserConfigurationException | TransformerException ex) {
 	                		        System.out.println(ex.getMessage());
 	                		    }
-	                		   
-	                		   
-	                		   
-	                	   
-	                	   System.out.println("");
-	                 
+	               	   
+	                	   System.out.println("");                 
 	            
 	            } catch (SQLException ex) {
 	            	ex.printStackTrace();
