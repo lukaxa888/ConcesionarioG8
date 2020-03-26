@@ -1,5 +1,4 @@
 public class Camion extends Vehiculo {
-
 	
 	private int carga;
 	private String tipoMercancia;
@@ -16,7 +15,5 @@ public class Camion extends Vehiculo {
 	public void setTipoMercancia(String tipoMercancia) {
 		this.tipoMercancia = tipoMercancia;
 	}
-	
-	
 	
 }

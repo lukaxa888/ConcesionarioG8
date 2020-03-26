@@ -31,11 +31,7 @@ import com.mysql.cj.MysqlConnection;
 	 
 		Scanner teclado = new Scanner(System.in);
 		
-	    Connection conexion = null;
-	    Statement comando = null;
-	    ResultSet registro;
-	    String nombreTabla;
-	    
+	    private Connection conexion = null;
 	    
 	    /**
 		  * Conecta el objeto a la base de datos configurada en el método al crear un objeto ConexionBD.
@@ -58,6 +54,7 @@ import com.mysql.cj.MysqlConnection;
 	        	conexion = null;
 	        }
 	    }
+
 	    
 	    public void desconectarMYSQL() {
 	    	try {
@@ -294,53 +291,53 @@ import com.mysql.cj.MysqlConnection;
 	                		        
 	                		        while(resultado.next()) {
                 		        
-	                		        // Creo los elementos
-	                		        Element vehiculo = documento.createElement("vehiculo");
+	                		        	// Creo los elementos
+	                		        	Element vehiculo = documento.createElement("vehiculo");
 	                		        
-	                		        // Numero_bastidor
-	                		        Element Numero_bastidor = documento.createElement("Numero_bastidor");
-	                		        Text textNumero_bastidor = documento.createTextNode(resultado.getString("Numero_bastidor"));
-	                		        Numero_bastidor.appendChild(textNumero_bastidor);
-	                		        vehiculo.appendChild(Numero_bastidor);
+	                		        	// Numero_bastidor
+	                		        	Element Numero_bastidor = documento.createElement("Numero_bastidor");
+	                		        	Text textNumero_bastidor = documento.createTextNode(resultado.getString("Numero_bastidor"));
+	                		        	Numero_bastidor.appendChild(textNumero_bastidor);
+	                		        	vehiculo.appendChild(Numero_bastidor);
 
-	                		        // Matricula
-	                		        Element matricula = documento.createElement("Matricula");
-	                		        Text textMatricula = documento.createTextNode(resultado.getString("Matricula"));
-	                		        matricula.appendChild(textMatricula);
-	                		        vehiculo.appendChild(matricula);
+	                		        	// Matricula
+	                		        	Element matricula = documento.createElement("Matricula");
+	                		        	Text textMatricula = documento.createTextNode(resultado.getString("Matricula"));
+	                		        	matricula.appendChild(textMatricula);
+	                		        	vehiculo.appendChild(matricula);
 
-	                		        // Color
-	                		        Element color = documento.createElement("Color");
-	                		        Text textColor = documento.createTextNode(resultado.getString("Color"));
-	                		        color.appendChild(textColor);
-	                		        vehiculo.appendChild(color);
+	                		        	// Color
+	                		        	Element color = documento.createElement("Color");
+	                		        	Text textColor = documento.createTextNode(resultado.getString("Color"));
+	                		        	color.appendChild(textColor);
+	                		        	vehiculo.appendChild(color);
 	                		        
-	                		        // Numero_asientos
-	                		        Element numero_asientos = documento.createElement("Numero_asientos");
-	                		        Text textNumero_asientos = documento.createTextNode(resultado.getString("Numero_asientos"));
-	                		        numero_asientos.appendChild(textNumero_asientos);
-	                		        vehiculo.appendChild(numero_asientos);
+	                		        	// Numero_asientos
+	                		        	Element numero_asientos = documento.createElement("Numero_asientos");
+	                		        	Text textNumero_asientos = documento.createTextNode(resultado.getString("Numero_asientos"));
+	                		        	numero_asientos.appendChild(textNumero_asientos);
+	                		        	vehiculo.appendChild(numero_asientos);
 
-	                		        // Precio
-	                		        Element precio = documento.createElement("Precio");
-	                		        Text textPrecio = documento.createTextNode(resultado.getString("Precio"));
-	                		        precio.appendChild(textPrecio);
-	                		        vehiculo.appendChild(precio);
+	                		        	// Precio
+	                		        	Element precio = documento.createElement("Precio");
+	                		        	Text textPrecio = documento.createTextNode(resultado.getString("Precio"));
+	                		        	precio.appendChild(textPrecio);
+	                		        	vehiculo.appendChild(precio);
 	                		        
-	                		        // Numero_serie
-	                		        Element serie_numero_serie = documento.createElement("Serie_numero_serie");
-	                		        Text textSerie_numero_serie = documento.createTextNode(resultado.getString("Serie_numero_serie"));
-	                		        serie_numero_serie.appendChild(textSerie_numero_serie);
-	                		        vehiculo.appendChild(serie_numero_serie);
+	                		        	// Numero_serie
+	                		        	Element serie_numero_serie = documento.createElement("Serie_numero_serie");
+	                		        	Text textSerie_numero_serie = documento.createTextNode(resultado.getString("Serie_numero_serie"));
+	                		        	serie_numero_serie.appendChild(textSerie_numero_serie);
+	                		        	vehiculo.appendChild(serie_numero_serie);
 	                		        
-	                		        // Tipo
-	                		        Element tipo = documento.createElement("Tipo");
-	                		        Text textTipo = documento.createTextNode(resultado.getString("Tipo"));
-	                		        tipo.appendChild(textTipo);
-	                		        vehiculo.appendChild(tipo);           		        
+		                		        // Tipo
+		                		        Element tipo = documento.createElement("Tipo");
+		                		        Text textTipo = documento.createTextNode(resultado.getString("Tipo"));
+		                		        tipo.appendChild(textTipo);
+		                		        vehiculo.appendChild(tipo);           		        
 	                		        
-	                		        // Añado al root el elemento vehiculo
-	                		        documento.getDocumentElement().appendChild(vehiculo);
+		                		        // Añado al root el elemento vehiculo
+		                		        documento.getDocumentElement().appendChild(vehiculo);
 	                		        
 	                		        }
 		                			   

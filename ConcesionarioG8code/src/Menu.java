@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 
 public class Menu {
 
-	ConexionBD cbd = new ConexionBD();
+	private ConexionBD cbd = new ConexionBD();
 	
 	Menu(){
 		
