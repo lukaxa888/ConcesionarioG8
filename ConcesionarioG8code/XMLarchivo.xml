@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concesionario SYSTEM "concesionarioDTD.dtd">
 <concesionario>
 <vehiculo>
     <Numero_bastidor>LDO12345456</Numero_bastidor>

@@ -1,0 +1,25 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="concesionario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="vehiculo" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Numero_bastidor"/>
+              <xs:element type="xs:string" name="Matricula"/>
+              <xs:element type="xs:string" name="Color"/>
+              <xs:element type="xs:byte" name="Numero_asientos"/>
+              <xs:element type="xs:short" name="Precio"/>
+              <xs:element type="xs:short" name="Serie_Numero_serie"/>
+              <xs:element type="xs:string" name="Tipo"/>
+              <xs:element type="xs:short" name="Carga"/>
+              <xs:element type="xs:string" name="Tipo_mercancia"/>
+              <xs:element type="xs:byte" name="Numero_puertas"/>
+              <xs:element type="xs:short" name="Capacidad_maletero"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

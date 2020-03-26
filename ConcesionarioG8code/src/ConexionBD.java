@@ -133,8 +133,8 @@ import com.mysql.cj.MysqlConnection;
 	                try {
 						Statement st = conexion.createStatement();
 						st.executeQuery("USE concesionario");
-						st.executeUpdate(Query);
 						st.executeUpdate(Query3);
+						st.executeUpdate(Query);
 						st.executeUpdate(Query2);
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -225,12 +225,7 @@ import com.mysql.cj.MysqlConnection;
                 
                 
 	    	 	
-	     }
-	     
-	     
-	     
-	     
-	     
+	     }    
 	     
 	     public void verDatosXML(String nombreTabla) {
 	            try {	            
@@ -327,9 +322,7 @@ import com.mysql.cj.MysqlConnection;
 	                		        System.out.println(ex.getMessage());
 	                		    }
 	                		   
-	                		   
-	                		   
-	                	   
+	                		      
 	                	   System.out.println("");
 	                 
 	            

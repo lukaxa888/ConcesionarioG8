@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 
 public class Menu {
 
-	CrearLeerXML xm1 = null;
+
 	ConexionBD cbd = new ConexionBD();
 	
 	Menu(){

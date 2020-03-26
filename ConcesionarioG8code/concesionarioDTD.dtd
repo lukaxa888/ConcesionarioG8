@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!ELEMENT concesionario (vehiculo)+>
+<!ELEMENT vehiculo (Numero_bastidor, Matricula, Color, Numero_asientos, Precio, Serie_Numero_serie, Tipo, Carga?, Tipo_mercancia?, Numero_puertas?, Capacidad_maletero?)>
+<!ELEMENT Numero_bastidor (#PCDATA)>
+<!ELEMENT Matricula (#PCDATA)>
+<!ELEMENT Color (#PCDATA)>
+<!ELEMENT Numero_asientos (#PCDATA)>
+<!ELEMENT Precio (#PCDATA)>
+<!ELEMENT Serie_Numero_serie (#PCDATA)>
+<!ELEMENT Tipo (#PCDATA)>
+<!ELEMENT Carga (#PCDATA)>
+<!ELEMENT Tipo_mercancia (#PCDATA)>
+<!ELEMENT Numero_puertas (#PCDATA)>
+<!ELEMENT Capacidad_maletero (#PCDATA)>
+
