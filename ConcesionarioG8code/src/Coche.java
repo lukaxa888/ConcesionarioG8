@@ -16,7 +16,4 @@ public class Coche extends Vehiculo {
 		this.capacidadMaletero = capacidadMaletero;
 	}
 	
-	
-	
-	
 }

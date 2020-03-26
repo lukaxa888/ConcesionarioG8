@@ -31,11 +31,8 @@ import com.mysql.cj.MysqlConnection;
 	 
 		Scanner teclado = new Scanner(System.in);
 		
-	    Connection conexion = null;
-	    Statement comando = null;
-	    ResultSet registro;
-	    String nombreTabla;
-	    	    
+	    private Connection conexion = null;
+	    
 	    /**
 		  * Conecta el objeto a la base de datos configurada en el método al crear un objeto ConexionBD.
 		  */ 
@@ -44,7 +41,7 @@ import com.mysql.cj.MysqlConnection;
 	            //Driver JDBC
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 
-	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
+	            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=mysql&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");	 	 
 
 	        } catch (ClassNotFoundException ex) {
 	            ex.printStackTrace();
@@ -57,6 +54,7 @@ import com.mysql.cj.MysqlConnection;
 	        	conexion = null;
 	        }
 	    }
+
 	    
 	    public void desconectarMYSQL() {
 	    	try {
@@ -65,25 +63,33 @@ import com.mysql.cj.MysqlConnection;
 				e.printStackTrace();
 			}
 	    }
+	   
 	    
 	    /**
-	     * Printea TODOS los datos de una tabla.
+	     * Printea TODOS los vehículos.
 	     */
-	     public void verDatos(String nombreTabla) {
-	            try {	            
-	            	
-	            	String Query = "SELECT * FROM " + nombreTabla;
-	                Statement st = conexion.createStatement();
-	                java.sql.ResultSet resultado;
+	     public void verDatosTotal() {
+	    	 verDatosCoches();
+	    	 System.out.println();
+	    	 verDatosCamiones();
+	     }
+	     
+	     /**
+	      * Printea todos los coches
+	      */
+	     public void verDatosCoches() {
+	    	 try {	            	            	
+	            	String Query = "SELECT vehiculo.Numero_bastidor, vehiculo.Matricula, Vehiculo.Color, Vehiculo.Numero_asientos, Vehiculo.Precio, Vehiculo.Serie_Numero_serie, Coche.Numero_puertas, Coche.Capacidad_maletero FROM vehiculo inner join coche on vehiculo.Numero_bastidor = coche.Vehiculo_Numero_bastidor;";
+	                Statement st = conexion.createStatement();	                
 	                st.executeQuery("USE concesionario");
-	                resultado = st.executeQuery(Query);         
+	                java.sql.ResultSet resultado = st.executeQuery(Query);              
 	                
 	                for (int x=1;x<=resultado.getMetaData().getColumnCount();x++) {
-               	     	System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
+            	     	System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
 	                }
-               	 
-               	System.out.println();
-               	
+            	 
+            	System.out.println();
+            	
 	                while(resultado.next()) {
 	                	   for (int x=1;x<=resultado.getMetaData().getColumnCount();x++)
 	                		   System.out.print(resultado.getString(x)+ "\t");                	   
@@ -93,7 +99,34 @@ import com.mysql.cj.MysqlConnection;
 	            } catch (SQLException ex) {
 	            	ex.printStackTrace();
 	            }
-	        }
+	     }
+	     
+	     /**
+	      * Printea todos los camiones
+	      */
+	     public void verDatosCamiones() {
+	    	 try {	            	            	
+	            	String Query = "SELECT vehiculo.Numero_bastidor, vehiculo.Matricula, Vehiculo.Color, Vehiculo.Numero_asientos, Vehiculo.Precio, Vehiculo.Serie_Numero_serie, Camion.Tipo_mercancia, Camion.Carga FROM vehiculo inner join camion on vehiculo.Numero_bastidor = camion.Vehiculo_Numero_bastidor;";
+	                Statement st = conexion.createStatement();
+	                st.executeQuery("USE concesionario");
+	                java.sql.ResultSet resultado = st.executeQuery(Query);                
+ 
+	                for (int x=1;x<=resultado.getMetaData().getColumnCount();x++) {
+            	     	System.out.print(resultado.getMetaData().getColumnName(x)+ "\t");        
+	                }
+            	 
+            	System.out.println();
+            	
+	                while(resultado.next()) {
+	                	   for (int x=1;x<=resultado.getMetaData().getColumnCount();x++)
+	                		   System.out.print(resultado.getString(x)+ "\t");                	   
+	                	   	   System.out.println("");
+	                } 
+	            
+	            } catch (SQLException ex) {
+	            	ex.printStackTrace();
+	            }
+	     }
 	     
 	     
 	     /**
@@ -105,8 +138,7 @@ import com.mysql.cj.MysqlConnection;
 	    	 String Query3 = new String();
 	    	 
 	    	 if(V1.getTipo().equals("coche")) {
-	    		 Coche C1=(Coche)V1;
-	    		 
+	    		 Coche C1=(Coche)V1;	    		 
 	    		 Query = "INSERT IGNORE INTO vehiculo VALUES(\"" +C1.getnBastidor()+ "\",\"" +C1.getMatricula()+ "\",\"" +C1.getColor()+ "\","+C1.getnAsientos()+","+C1.getPrecio()+","+C1.getnSerie()+",\""+C1.getTipo()+"\")";
 	    		 //System.out.println(Query);
 	    		 Query2 = "INSERT IGNORE INTO coche VALUES("+C1.getnPuertas()+","+C1.getCapacidadMaletero()+ ",\"" +C1.getnBastidor()+"\")";
@@ -140,7 +172,8 @@ import com.mysql.cj.MysqlConnection;
 						e.printStackTrace();
 					}
 	    	 }
-	    	
+	    
+	     
 	     /**
 	      * Elimina el registro del vehículo que se le pasa por parámetros.
 	      */
@@ -165,10 +198,12 @@ import com.mysql.cj.MysqlConnection;
 						st.executeQuery("USE concesionario");
 						st.executeUpdate(Query);
 						st.executeUpdate(Query1);
+						st.executeUpdate(Query2);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 	     }	     
+	
 	     
 	     /**
 	      * Pide por parametros un numero de bastidor y un color y le asigna ese color al vehículo al que le corresponde el número
@@ -190,7 +225,11 @@ import com.mysql.cj.MysqlConnection;
 						e.printStackTrace();
 					}
 	     }
+
 	     
+	     /**
+	      * Llama al procedimiento de la base de datos que lista todos los vehículos pintados del color que se le pasa
+	      */
 	     public void vehiculosPintados(String color) {
 	    	 String Query = new String();
 	    	 
@@ -221,12 +260,22 @@ import com.mysql.cj.MysqlConnection;
 					e.printStackTrace();
 				}
 	    	 	System.out.println();	
+<<<<<<< HEAD
 	    	 	         
                 
                 
 	    	 	
 	     }    
 	     
+=======
+ 	 	
+	     }
+  
+	     
+	     /**
+	      * Exporta los datos de la base de datos a un archivo xml
+	      */
+>>>>>>> 06424329934369544dea0e0be35953f0bd775e3b
 	     public void verDatosXML(String nombreTabla) {
 	            try {	            
 	            	
@@ -248,65 +297,58 @@ import com.mysql.cj.MysqlConnection;
 	                		        // Creo un documento con un elemento raiz
 	                		        Document documento = implementation.createDocument(null, "concesionario", null);
 	                		        documento.setXmlVersion("1.0");
-
 	                		        
 	                		        while(resultado.next()) {
-		        	                	   
+                		        
+	                		        	// Creo los elementos
+	                		        	Element vehiculo = documento.createElement("vehiculo");
 	                		        
-	                		        
-	                		        // Creo los elementos
-	                		        Element vehiculo = documento.createElement("vehiculo");
-	                		        
-	                		        
-	                		        
-	                		        // Numero_bastidor
-	                		        Element Numero_bastidor = documento.createElement("Numero_bastidor");
-	                		        Text textNumero_bastidor = documento.createTextNode(resultado.getString("Numero_bastidor"));
-	                		        Numero_bastidor.appendChild(textNumero_bastidor);
-	                		        vehiculo.appendChild(Numero_bastidor);
+	                		        	// Numero_bastidor
+	                		        	Element Numero_bastidor = documento.createElement("Numero_bastidor");
+	                		        	Text textNumero_bastidor = documento.createTextNode(resultado.getString("Numero_bastidor"));
+	                		        	Numero_bastidor.appendChild(textNumero_bastidor);
+	                		        	vehiculo.appendChild(Numero_bastidor);
 
-	                		        // Matricula
-	                		        Element matricula = documento.createElement("Matricula");
-	                		        Text textMatricula = documento.createTextNode(resultado.getString("Matricula"));
-	                		        matricula.appendChild(textMatricula);
-	                		        vehiculo.appendChild(matricula);
+	                		        	// Matricula
+	                		        	Element matricula = documento.createElement("Matricula");
+	                		        	Text textMatricula = documento.createTextNode(resultado.getString("Matricula"));
+	                		        	matricula.appendChild(textMatricula);
+	                		        	vehiculo.appendChild(matricula);
 
-	                		        // Color
-	                		        Element color = documento.createElement("Color");
-	                		        Text textColor = documento.createTextNode(resultado.getString("Color"));
-	                		        color.appendChild(textColor);
-	                		        vehiculo.appendChild(color);
+	                		        	// Color
+	                		        	Element color = documento.createElement("Color");
+	                		        	Text textColor = documento.createTextNode(resultado.getString("Color"));
+	                		        	color.appendChild(textColor);
+	                		        	vehiculo.appendChild(color);
 	                		        
-	                		        // Numero_asientos
-	                		        Element numero_asientos = documento.createElement("Numero_asientos");
-	                		        Text textNumero_asientos = documento.createTextNode(resultado.getString("Numero_asientos"));
-	                		        numero_asientos.appendChild(textNumero_asientos);
-	                		        vehiculo.appendChild(numero_asientos);
+	                		        	// Numero_asientos
+	                		        	Element numero_asientos = documento.createElement("Numero_asientos");
+	                		        	Text textNumero_asientos = documento.createTextNode(resultado.getString("Numero_asientos"));
+	                		        	numero_asientos.appendChild(textNumero_asientos);
+	                		        	vehiculo.appendChild(numero_asientos);
 
-	                		        // Precio
-	                		        Element precio = documento.createElement("Precio");
-	                		        Text textPrecio = documento.createTextNode(resultado.getString("Precio"));
-	                		        precio.appendChild(textPrecio);
-	                		        vehiculo.appendChild(precio);
+	                		        	// Precio
+	                		        	Element precio = documento.createElement("Precio");
+	                		        	Text textPrecio = documento.createTextNode(resultado.getString("Precio"));
+	                		        	precio.appendChild(textPrecio);
+	                		        	vehiculo.appendChild(precio);
 	                		        
-	                		        // Numero_serie
-	                		        Element serie_numero_serie = documento.createElement("Serie_numero_serie");
-	                		        Text textSerie_numero_serie = documento.createTextNode(resultado.getString("Serie_numero_serie"));
-	                		        serie_numero_serie.appendChild(textSerie_numero_serie);
-	                		        vehiculo.appendChild(serie_numero_serie);
+	                		        	// Numero_serie
+	                		        	Element serie_numero_serie = documento.createElement("Serie_numero_serie");
+	                		        	Text textSerie_numero_serie = documento.createTextNode(resultado.getString("Serie_numero_serie"));
+	                		        	serie_numero_serie.appendChild(textSerie_numero_serie);
+	                		        	vehiculo.appendChild(serie_numero_serie);
 	                		        
-	                		        // Tipo
-	                		        Element tipo = documento.createElement("Tipo");
-	                		        Text textTipo = documento.createTextNode(resultado.getString("Tipo"));
-	                		        tipo.appendChild(textTipo);
-	                		        vehiculo.appendChild(tipo);
-
+		                		        // Tipo
+		                		        Element tipo = documento.createElement("Tipo");
+		                		        Text textTipo = documento.createTextNode(resultado.getString("Tipo"));
+		                		        tipo.appendChild(textTipo);
+		                		        vehiculo.appendChild(tipo);           		        
 	                		        
-
-	                		        // Añado al root el elemento vehiculo
-	                		        documento.getDocumentElement().appendChild(vehiculo);
+		                		        // Añado al root el elemento vehiculo
+		                		        documento.getDocumentElement().appendChild(vehiculo);
 	                		        
-		        	                	   }
+	                		        }
 		                			   
 	                		        // Asocio el source con el Document
 	                		        Source source = new DOMSource(documento);
@@ -321,10 +363,15 @@ import com.mysql.cj.MysqlConnection;
 	                		    } catch (ParserConfigurationException | TransformerException ex) {
 	                		        System.out.println(ex.getMessage());
 	                		    }
+<<<<<<< HEAD
 	                		   
 	                		      
 	                	   System.out.println("");
 	                 
+=======
+	               	   
+	                	   System.out.println("");                 
+>>>>>>> 06424329934369544dea0e0be35953f0bd775e3b
 	            
 	            } catch (SQLException ex) {
 	            	ex.printStackTrace();

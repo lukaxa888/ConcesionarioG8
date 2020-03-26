@@ -11,14 +11,20 @@ import org.w3c.dom.NodeList;
 
 public class Menu {
 
+<<<<<<< HEAD
 
 	ConexionBD cbd = new ConexionBD();
+=======
+	private ConexionBD cbd = new ConexionBD();
+>>>>>>> 06424329934369544dea0e0be35953f0bd775e3b
 	
 	Menu(){
 		
 	}
 
-	
+	/**
+	 * Método que printea el menú al usuario
+	 */
 	void menutexto() {
 		
 		System.out.println("\t GESTIÓN DE CONCESIONARIO G8");
@@ -39,6 +45,9 @@ public class Menu {
 		
 	}
 	
+	/**
+	 * Método que regula las opciones posibles en el menú y el acceso a las mismas
+	 */
 	void menu() {
 		boolean salir=false;
 		int numero = 0;
@@ -73,6 +82,7 @@ public class Menu {
 			}
 			
 			if(numero == 5) {
+				cbd.desconectarMYSQL();
 				salir=true;
 			}
 			
@@ -107,17 +117,17 @@ public class Menu {
 			} while(numTipo<1||numTipo>3);
 		
 			if(numTipo==1) {
-				cbd.verDatos("coche");
+				cbd.verDatosCoches();
 				System.out.println();
 			}
 		
 			if(numTipo==2) {
-				cbd.verDatos("camion");
+				cbd.verDatosCamiones();
 				System.out.println();
 			}
 		
 			if(numTipo==3) {
-				cbd.verDatos("vehiculo");
+				cbd.verDatosTotal();
 				System.out.println();
 			}
 		
@@ -132,7 +142,6 @@ public class Menu {
 			
 		}
 		
-		cbd.desconectarMYSQL();
 	}	
 	
 	/**
@@ -166,11 +175,11 @@ public class Menu {
 			ca1.setnBastidor(numBastidor);
 			cbd.venderVehiculo(ca1.getnBastidor());
 		}
-		cbd.desconectarMYSQL();
+		
 	}	
 	
 	/**
-	 * Dependiendo de la opcion elegida: listar vehiculos pintados del color introducido o pintar un vehiculo (camnbiar color)
+	 * Dependiendo de la opcion elegida: listar vehiculos pintados del color introducido o pintar un vehiculo (cambiar color)
 	 */
 	void pintar() {
 		ConexionBD cbd = new ConexionBD();
@@ -223,9 +232,7 @@ public class Menu {
 			}
 		
 		}
-		
-		
-		cbd.desconectarMYSQL();
+	
 	}
 	
 	/**
@@ -253,9 +260,9 @@ public class Menu {
 		
 		if(numero==1) {
 			
-			insertarXML(); 
+			insertarXML();
 			
-	            }
+	    }
 				
 		if(numero==2) {
 			
@@ -265,7 +272,7 @@ public class Menu {
 				System.out.println("2-> CAMION");
 				System.out.println();
 				
-					cocheOCamion=Console.readInt();
+				cocheOCamion=Console.readInt();
 				
 			} while(cocheOCamion<1||cocheOCamion>2);
 			
@@ -352,9 +359,13 @@ public class Menu {
 			}
 			
 		}
-		cbd.desconectarMYSQL();
+	
 	}
 	
+	
+	/**
+	 * Inserta los datos del xml pasado por consola en la base de datos del concesionario
+	 */
 	void insertarXML()
 	{
 		try {
@@ -446,21 +457,16 @@ public class Menu {
                     cbd.insertarVehiculo(c1);
 
                 }
-
                     
                 } 
-
-                   
+                  
             }
             
 		catch(Exception e) {
 			e.printStackTrace(); 
         }
 		
-		cbd.desconectarMYSQL();
-		
-	}
-	
+	}	
 }
 
 
